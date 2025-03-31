@@ -1,0 +1,14 @@
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  host: longhorn.hive.gavriliu.com
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+
+# longhornManager:
+#   nodeSelector:
+#     node-role.kubernetes.io/storage: "true"
+
+metrics:
+  serviceMonitor:
+    enabled: true
