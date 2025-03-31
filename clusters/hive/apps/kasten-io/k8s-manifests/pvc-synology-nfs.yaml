@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synology-nfs
+  namespace: kasten-io
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi 
+  volumeName: synology-nfs
+  storageClassName: ""

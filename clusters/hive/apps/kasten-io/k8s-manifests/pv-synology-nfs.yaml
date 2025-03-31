@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: synology-nfs
+  namespace: kasten-io
+spec:
+  capacity:
+    storage: 100Gi 
+  accessModes:
+    - ReadWriteMany 
+  persistentVolumeReclaimPolicy: Retain 
+  nfs: 
+    path: /volume1/backup
+    server: 10.0.0.10
+    readOnly: false

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kasten
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kasten-io
+  project: default
+  sources:
+  - repoURL: https://charts.kasten.io
+    chart: k10
+    targetRevision: "7.5.8"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/kasten-io/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    path: clusters/hive/apps/kasten-io/k8s-manifests
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true

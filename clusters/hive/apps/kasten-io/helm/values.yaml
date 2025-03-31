@@ -1,0 +1,67 @@
+ingress:
+  create: true
+  name: "kasten"
+  tls:
+    enabled: false
+    secretName: ""
+  class: traefik
+  host: kasten.hive.gavriliu.com
+  urlPath: ""
+  pathType: Prefix
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+  defaultBackend:
+    service:
+      enabled: false
+      name: ""
+      port:
+        name: ""
+        number: 8000
+    resource:
+      enabled: false
+      apiGroup: ""
+      kind: ""
+      name: ""
+
+prometheus:
+  server:
+    enabled: true
+
+auth:
+  basicAuth:
+    enabled: true
+    secretName: ""
+    htpasswd: "admin:$2y$10$3b5sBox3neeizj8mhgnJJOc4KvRmIxMtcOyY8i1yNnNRO/dHWN6gS"
+
+excludedApps: [
+  "default",
+  "kube-node-lease",
+  "kube-public",
+  "kube-system",
+]
+
+timeout:
+  blueprintBackup: 600
+  blueprintRestore: 600
+  blueprintDelete: 600
+  blueprintHooks: 600
+  checkRepoPodReady: 600
+  statsPodReady: 600
+  efsRestorePodReady: 600
+  workerPodReady: 600
+  jobWait: ""
+
+limiter:
+#   executorReplicas: 2
+#   executorThreads: 2
+#   workloadSnapshotsPerAction: 2
+  csiSnapshotsPerCluster: 2
+  directSnapshotsPerCluster: 2
+  # snapshotExportsPerAction: 2
+  snapshotExportsPerCluster: 2
+  genericVolumeBackupsPerCluster: 2
+  imageCopiesPerCluster: 2
+#   workloadRestoresPerAction: 2
+#   csiSnapshotRestoresPerAction: 2
+#   volumeRestoresPerAction: 2
+  volumeRestoresPerCluster: 2
