@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: audiobookshelf
+  name: audiobookshelf
+  namespace: audiobookshelf
+spec:
+  ports:
+    - name: audiobookshelf
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: audiobookshelf
+  sessionAffinity: None
+  type: ClusterIP
