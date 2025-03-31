@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-gavriliu-com
+  namespace: traefik
+spec:
+  secretName: wildcard-gavriliu-com-tls
+  dnsNames:
+    - "gavriliu.com"
+    - "*.gavriliu.com"
+    - "*.hive.gavriliu.com"
+    - "*.home.gavriliu.com"
+  issuerRef:
+    name: cloudflare
+    kind: Issuer
