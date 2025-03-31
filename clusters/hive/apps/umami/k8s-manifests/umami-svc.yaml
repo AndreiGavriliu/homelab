@@ -6,6 +6,7 @@ metadata:
   name: umami
   namespace: umami
 spec:
+  sessionAffinity: ClientIP
   ports:
     - name: umami
       port: 3000
