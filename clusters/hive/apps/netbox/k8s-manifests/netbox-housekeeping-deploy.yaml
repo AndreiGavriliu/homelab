@@ -33,14 +33,14 @@ spec:
             - name: DB_HOST
               value: "postgres"
             - name: DB_NAME
-              value: "postgres"
+              value: "netbox"
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DB_PASSWORD
                   name: netbox
             - name: DB_USER
-              value: "postgres"
+              value: "netbox"
             - name: GRAPHQL_ENABLED
               value: "true"
             - name: HOUSEKEEPING_INTERVAL
