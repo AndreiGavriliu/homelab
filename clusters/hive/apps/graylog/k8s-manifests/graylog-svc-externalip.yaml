@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-externalip
+  namespace: graylog
+  labels:
+    app: graylog
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.0.0.44
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: UDP
+    nodePort: 30514
+    port: 30514
+    targetPort: 30514
+    name: graylog-externalip
+  selector:
+    app: graylog

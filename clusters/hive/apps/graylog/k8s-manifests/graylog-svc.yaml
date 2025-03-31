@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: graylog
+  name: graylog
+  namespace: graylog
+spec:
+  ports:
+    - name: tcp-9000
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+    - name: tcp-5140
+      port: 5140
+      protocol: TCP
+      targetPort: 5140
+    - name: udp-5140
+      port: 5140
+      protocol: UDP
+      targetPort: 5140
+    - name: tcp-12201
+      port: 12201
+      protocol: TCP
+      targetPort: 12201
+    - name: udp-12201
+      port: 12201
+      protocol: UDP
+      targetPort: 12201
+    - name: tcp-13301
+      port: 13301
+      protocol: TCP
+      targetPort: 13301
+  selector:
+    app: graylog
+  sessionAffinity: None
+  type: ClusterIP

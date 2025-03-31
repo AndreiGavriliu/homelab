@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+  namespace: graylog
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: mongodb

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+  namespace: graylog
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      serviceAccountName: mongodb
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: mongo:8.0.6
+          imagePullPolicy: Always
+          name: mongodb
+          env:
+            - name: MONGO_INITDB_DATABASE
+              value: graylog
+          resources:
+            requests:
+              cpu: 50m
+              memory: 500Mi
+            limits:
+              memory: 500Mi
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb
+      volumes:
+        - name: mongodb
+          persistentVolumeClaim:
+            claimName: mongodb

@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graylog
+  labels:
+    app: graylog
+  namespace: graylog
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: graylog
+  template:
+    metadata:
+      labels:
+        app: graylog
+    spec:
+      serviceAccountName: graylog
+      containers:
+        - image: graylog/graylog:6.1.8
+          imagePullPolicy: Always
+          name: graylog
+          ports:
+            - containerPort: 9000
+              name: tcp-9000
+              protocol: TCP
+            - containerPort: 5044
+              name: tcp-5044
+              protocol: TCP
+            - containerPort: 5140
+              name: tcp-5140
+              protocol: TCP
+            - containerPort: 5140
+              name: udp-5140
+              protocol: UDP
+            - containerPort: 12201
+              name: tcp-12201
+              protocol: TCP
+            - containerPort: 12201
+              name: udp-12201
+              protocol: UDP
+            - containerPort: 13301
+              name: tcp-13301
+              protocol: TCP
+          env:
+            - name: GRAYLOG_HTTP_EXTERNAL_URI
+              value: "https://graylog.gavriliu.com/"
+            - name: GRAYLOG_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: graylog
+                  key: GRAYLOG_MONGODB_URI
+            - name: GRAYLOG_ELASTICSEARCH_HOSTS
+              valueFrom:
+                secretKeyRef:
+                  name: graylog
+                  key: GRAYLOG_ELASTICSEARCH_HOSTS
+          resources:
+            requests:
+              cpu: 300m
+              memory: 4200Mi 
+            limits:
+              memory: 4200Mi
+          volumeMounts:
+            - mountPath: /usr/share/graylog/data
+              name: graylog-data
+            - mountPath: /usr/share/graylog/data/node-id
+              name: graylog-node-id
+            - mountPath: /usr/share/graylog/data/config/graylog.conf
+              subPath: graylog.conf
+              name: graylog-conf
+      volumes:
+        - name: graylog-data
+          persistentVolumeClaim:
+            claimName: graylog-data
+        - name: graylog-node-id
+          persistentVolumeClaim:
+            claimName: graylog-node-id
+        - name: graylog-conf
+          configMap:
+            name: graylog

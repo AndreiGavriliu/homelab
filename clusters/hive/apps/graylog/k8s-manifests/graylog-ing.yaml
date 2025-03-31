@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: graylog
+  namespace: graylog
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: graylog.gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: graylog
+                port:
+                  number: 9000
+            path: /
+            pathType: Prefix

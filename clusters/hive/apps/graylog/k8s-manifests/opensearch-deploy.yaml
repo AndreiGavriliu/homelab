@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opensearch
+  labels:
+    app: opensearch
+  namespace: graylog
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: opensearch
+  template:
+    metadata:
+      labels:
+        app: opensearch
+    spec:
+      serviceAccountName: opensearch
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: opensearchproject/opensearch:2.19.1
+          imagePullPolicy: Always
+          name: opensearch
+          env:
+            - name: http.host
+              value: 0.0.0.0
+            - name: transport.host
+              value: localhost
+            - name: OPENSEARCH_JAVA_OPTS
+              value: -Xms512m -Xmx512m
+            - name: plugins.security.disabled
+              value: "true"
+            - name: discovery.type
+              value: single-node
+            - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opensearch
+                  key: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+          resources:
+            requests:
+              cpu: 200m
+              memory: 6400Mi
+            limits:
+              memory: 6400Mi
+          volumeMounts:
+            - mountPath: /usr/share/opensearch/data
+              name: opensearch
+      volumes:
+        - name: opensearch
+          persistentVolumeClaim:
+            claimName: opensearch
