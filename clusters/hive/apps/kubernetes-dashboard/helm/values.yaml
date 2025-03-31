@@ -1,0 +1,20 @@
+app:
+  ingress:
+    enabled: true
+    hosts:
+      - hive.gavriliu.com
+    ingressClassName: traefik
+    useDefaultAnnotations: false
+    path: /
+    issuer:
+      name: selfsigned
+      scope: disabled
+    tls:
+      enabled: false
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+      
+kong:
+  proxy:
+    http:
+      enabled: true

@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-dashboard
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubernetes-dashboard
+  project: default
+  sources:
+  - repoURL: https://kubernetes.github.io/dashboard
+    chart: kubernetes-dashboard
+    targetRevision: "7.11.1"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/kubernetes-dashboard/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    path: clusters/hive/apps/kubernetes-dashboard/k8s-manifests
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
