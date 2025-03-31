@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: freshrss
+  name: freshrss
+  namespace: freshrss
+spec:
+  ports:
+    - name: freshrss
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: freshrss
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: freshrss
+  labels:
+    app: freshrss
+  namespace: freshrss
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: freshrss
