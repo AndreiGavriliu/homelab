@@ -6,7 +6,7 @@ metadata:
     app: umami
   namespace: umami
 spec:
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
