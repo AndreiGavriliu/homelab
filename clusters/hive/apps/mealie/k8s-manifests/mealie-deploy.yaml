@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+  labels:
+    k8s-app: mealie
+  namespace: mealie
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: mealie
+  template:
+    metadata:
+      labels:
+        k8s-app: mealie
+    spec:
+      containers:
+        - image: ghcr.io/mealie-recipes/mealie:v2.8.0
+          imagePullPolicy: Always
+          name: mealie
+          resources:
+            requests:
+              cpu: 50m
+              memory: 400Mi
+            limits:
+              memory: 400Mi
+          env:
+            - name: BASE_URL
+              value: "https://food.gavriliu.com/"
+            - name: RECIPE_PUBLIC
+              value: "true"
+            - name: RECIPE_DISABLE_COMMENTS
+              value: "true"
+            - name: AUTO_BACKUP_ENABLED
+              value: "true"
+            - name: TZ
+              value: "Europe/Berlin"
+          volumeMounts:
+            - mountPath: /app/data
+              name: mealie
+      volumes:
+        - name: mealie
+          persistentVolumeClaim:
+            claimName: mealie
