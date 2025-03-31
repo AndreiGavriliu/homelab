@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+  namespace: grafana
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - image: grafana/grafana:11.6.0
+          imagePullPolicy: Always
+          name: grafana
+          env:
+            - name: GF_AUTH_GENERIC_OAUTH_ENABLED
+              value: "false"
+            - name: GF_AUTH_GENERIC_OAUTH_NAME
+              value: "SSO"
+            - name: GF_AUTH_GENERIC_OAUTH_CLIENT_ID
+              value: "grafana"
+            - name: GF_AUTH_GENERIC_OAUTH_SCOPES
+              value: "openid email profile offline_access roles"
+            - name: GF_AUTH_GENERIC_OAUTH_AUTH_URL
+              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/auth"
+            - name: GF_AUTH_GENERIC_OAUTH_TOKEN_URL
+              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/token"
+            - name: GF_AUTH_GENERIC_OAUTH_API_URL
+              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/userinfo"
+            - name: GF_AUTH_SIGNOUT_REDIRECT_URL
+              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/logout?post_logout_redirect_uri=https%3A%2F%2Fgrafana.gavriliu.com%2Flogin&client_id=grafana"
+            - name: GF_SERVER_ROOT_URL
+              value: "https://grafana.gavriliu.com"
+            - name: GF_AUTH_OAUTH_AUTO_LOGIN
+              value: "true"
+            - name: GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP
+              value: "true"
+            - name: GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH
+              value: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+            - name: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grafana
+                  key: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana
+      volumes:
+        - name: grafana
+          persistentVolumeClaim:
+            claimName: grafana
