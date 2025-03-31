@@ -6,6 +6,7 @@ metadata:
   name: hugo-gavriliu-com
   namespace: hugo-gavriliu-com
 spec:
+  sessionAffinity: ClientIP
   ports:
     - name: hugo-gavriliu-com
       port: 80

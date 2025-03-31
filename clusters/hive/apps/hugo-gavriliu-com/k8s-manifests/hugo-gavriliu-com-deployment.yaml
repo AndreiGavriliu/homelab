@@ -6,7 +6,7 @@ metadata:
     k8s-app: hugo-gavriliu-com
   namespace: hugo-gavriliu-com
 spec:
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 0
   selector:
     matchLabels:
