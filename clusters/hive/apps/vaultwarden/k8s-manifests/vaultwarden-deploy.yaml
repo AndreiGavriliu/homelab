@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  labels:
+    k8s-app: vaultwarden
+  namespace: vaultwarden
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: vaultwarden
+  template:
+    metadata:
+      labels:
+        k8s-app: vaultwarden
+    spec:
+      serviceAccount: vaultwarden
+      containers:
+        - image: vaultwarden/server:1.33.2
+          imagePullPolicy: Always
+          name: vaultwarden
+          livenessProbe:
+            httpGet:
+              path: /
+              port: tcp-80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: tcp-80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+          ports:
+            - containerPort: 80
+              name: tcp-80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          volumeMounts:
+            - mountPath: /data
+              name: vaultwarden
+      volumes:
+        - name: vaultwarden
+          persistentVolumeClaim:
+            claimName: vaultwarden

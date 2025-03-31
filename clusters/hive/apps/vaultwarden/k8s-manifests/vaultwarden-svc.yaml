@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: vaultwarden
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  ports:
+    - name: vaultwarden
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    k8s-app: vaultwarden
+  sessionAffinity: None
+  type: ClusterIP

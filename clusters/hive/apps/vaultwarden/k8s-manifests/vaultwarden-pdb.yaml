@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: vaultwarden
+  labels:
+    k8s-app: vaultwarden
+  namespace: vaultwarden
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      k8s-app: vaultwarden
