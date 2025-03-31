@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ntfy-externalip
+  namespace: ntfy
+  labels:
+    app: ntfy
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.0.0.45
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 30025
+      targetPort: 25
+  selector:
+    app: ntfy

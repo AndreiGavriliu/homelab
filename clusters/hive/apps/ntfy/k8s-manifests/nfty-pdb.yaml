@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ntfy
+  labels:
+    app: ntfy
+  namespace: ntfy
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: ntfy
