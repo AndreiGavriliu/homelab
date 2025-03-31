@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wger
+  name: wger
+  namespace: wger
+spec:
+  ports:
+    - name: wger
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: wger
+  sessionAffinity: None
+  type: ClusterIP
