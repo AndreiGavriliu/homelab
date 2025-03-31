@@ -1,0 +1,8 @@
+ingress:
+  enabled: true
+  ingressClassName: "traefik"
+  hostname: sealed-secrets.hive.gavriliu.com
+  annotations: 
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+
+keyrenewperiod: "720h30m"
