@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ddclient
+  labels:
+    k8s-app: ddclient
+  namespace: ddclient
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: ddclient
+  template:
+    metadata:
+      labels:
+        k8s-app: ddclient
+    spec:
+      serviceAccountName: ddclient
+      containers:
+        - image: lscr.io/linuxserver/ddclient:4.0.0
+          imagePullPolicy: Always
+          name: ddclient
+          resources:
+            # requests:
+            #   cpu: 50m
+            #   memory: 50Mi
+            # limits:
+            #   memory: 50Mi
+          volumeMounts:
+            - name: ddclient
+              mountPath: /config
+      volumes:
+        - name: ddclient
+          persistentVolumeClaim:
+            claimName: ddclient

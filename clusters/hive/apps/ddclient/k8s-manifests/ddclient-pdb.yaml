@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ddclient
+  labels:
+    k8s-app: ddclient
+  namespace: ddclient
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      k8s-app: ddclient
