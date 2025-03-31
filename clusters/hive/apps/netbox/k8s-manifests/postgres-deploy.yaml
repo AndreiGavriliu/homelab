@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: postgres
+  name: postgres
+  namespace: netbox
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: postgres
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: postgres
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: "netbox"
+            - name: POSTGRES_USER
+              value: "netbox"
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: postgres
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          image: postgres:17.4-alpine
+          name: postgres
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: netbox-postgres-data
+      restartPolicy: Always
+      volumes:
+        - name: netbox-postgres-data
+          persistentVolumeClaim:
+            claimName: postgres

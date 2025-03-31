@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: redis-cache
+  name: redis-cache
+  namespace: netbox
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: redis-cache
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        k8s-app: redis-cache
+    spec:
+      containers:
+        - args:
+            - sh
+            - -c
+            - redis-server --requirepass $REDIS_PASSWORD
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_PASSWORD
+                  name: redis-cache
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          image: redis:7.4.2-alpine
+          name: redis-cache
+      restartPolicy: Always

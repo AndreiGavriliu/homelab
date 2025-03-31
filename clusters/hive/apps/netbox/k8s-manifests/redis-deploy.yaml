@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: redis
+  name: redis
+  namespace: netbox
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: redis
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: redis
+    spec:
+      containers:
+        - args:
+            - sh
+            - -c
+            - redis-server --appendonly yes --requirepass $REDIS_PASSWORD
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_PASSWORD
+                  name: redis
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          image: redis:7.4.2-alpine
+          name: redis
+          volumeMounts:
+            - mountPath: /data
+              name: netbox-redis-data
+      restartPolicy: Always
+      volumes:
+        - name: netbox-redis-data
+          persistentVolumeClaim:
+            claimName: redis
+          # nfs:
+          #   path: /nfs/netbox-redis-pvc-93fe2f82-99d9-4c21-8b56-82047c1b841d
+          #   server: 10.0.0.21

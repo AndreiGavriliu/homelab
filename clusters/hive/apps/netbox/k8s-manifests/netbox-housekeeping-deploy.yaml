@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: netbox-houskeeping
+  name: netbox-housekeeping
+  namespace: netbox
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: netbox-housekeeping
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: netbox-housekeeping
+    spec:
+      containers:
+        - args:
+            - /opt/netbox/housekeeping.sh
+          env:
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_CACHE_PORT
+              value: "6379"
+            - name: DB_WAIT_DEBUG
+              value: "1"
+            - name: CORS_ORIGIN_ALLOW_ALL
+              value: "true"
+            - name: DB_HOST
+              value: "postgres"
+            - name: DB_NAME
+              value: "postgres"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: netbox
+            - name: DB_USER
+              value: "postgres"
+            - name: GRAPHQL_ENABLED
+              value: "true"
+            - name: HOUSEKEEPING_INTERVAL
+              value: "86400"
+            - name: MAX_PAGE_SIZE
+              value: "1000"
+            - name: MEDIA_ROOT
+              value: "/opt/netbox/netbox/media"
+            - name: METRICS_ENABLED
+              value: "false"
+            - name: REDIS_CACHE_DATABASE
+              value: "1"
+            - name: REDIS_CACHE_HOST
+              value: "redis-cache"
+            - name: REDIS_CACHE_INSECURE_SKIP_TLS_VERIFY
+              value: "false"
+            - name: REDIS_CACHE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_CACHE_PASSWORD
+                  name: netbox
+            - name: REDIS_CACHE_SSL
+              value: "false"
+            - name: REDIS_DATABASE
+              value: "0"
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_INSECURE_SKIP_TLS_VERIFY
+              value: "false"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_PASSWORD
+                  name: netbox
+            - name: REDIS_SSL
+              value: "false"
+            - name: RELEASE_CHECK_URL
+              value: "https://api.github.com/repos/netbox-community/netbox/releases"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SECRET_KEY
+                  name: netbox
+            - name: SKIP_SUPERUSER
+              value: "false"
+            - name: SUPERUSER_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: SUPERUSER_API_TOKEN
+                  name: netbox
+            - name: SUPERUSER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: SUPERUSER_EMAIL
+                  name: netbox
+            - name: SUPERUSER_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: SUPERUSER_NAME
+                  name: netbox
+            - name: SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SUPERUSER_PASSWORD
+                  name: netbox
+            - name: WEBHOOKS_ENABLED
+              value: "true"
+          image: netboxcommunity/netbox:v4.2.6
+          imagePullPolicy: Always
+          name: netbox-housekeeping
+          volumeMounts:
+            - mountPath: /opt/netbox/netbox/media
+              name: netbox-media-files
+      restartPolicy: Always
+      volumes:
+        - name: netbox-media-files
+          persistentVolumeClaim:
+            claimName: netbox-media-files

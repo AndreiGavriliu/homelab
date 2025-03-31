@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: netbox
+  name: netbox
+  namespace: netbox
+spec:
+  ports:
+    - name: netbox
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    k8s-app: netbox
+  sessionAffinity: None
+  type: ClusterIP
