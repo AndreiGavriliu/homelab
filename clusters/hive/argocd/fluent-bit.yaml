@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluent-bit
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: graylog
+  project: default
+  sources:
+  - repoURL: https://fluent.github.io/helm-charts
+    chart: fluent-bit
+    targetRevision: "0.48.9"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/fluent-bit/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
