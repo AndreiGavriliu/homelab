@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium
+  labels:
+    k8s-app: selenium
+  namespace: changedetection
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: selenium
+  template:
+    metadata:
+      labels:
+        k8s-app: selenium
+    spec:
+      serviceAccountName: selenium
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1200
+        runAsGroup: 1201
+      containers:
+        - name: selenium
+          image: selenium/standalone-chrome:134.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+          ports:
+            - containerPort: 4444
+              name: tcp-4444
+              protocol: TCP
+            - containerPort: 7900
+              name: tcp-7900
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: tcp-4444
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: tcp-4444
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+      - name: dshm
+        emptyDir:
+          medium: Memory

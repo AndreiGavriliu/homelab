@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: changedetection
+  labels:
+    k8s-app: changedetection
+  namespace: changedetection
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: changedetection
+  template:
+    metadata:
+      labels:
+        k8s-app: changedetection
+    spec:
+      serviceAccountName: changedetection
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - name: changedetection
+          image: dgtlmoon/changedetection.io:0.49.9
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 300Mi
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: PLAYWRIGHT_DRIVER_URL
+              value: ws://playwright-chrome:3000/
+          ports:
+            - containerPort: 5000
+              name: tcp-5000
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: tcp-5000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: tcp-5000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /datastore
+              name: changedetection
+      volumes:
+        - name: changedetection
+          persistentVolumeClaim:
+            claimName: changedetection

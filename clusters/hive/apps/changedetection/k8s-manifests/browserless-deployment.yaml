@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: browserless
+  labels:
+    k8s-app: browserless
+  namespace: changedetection
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: browserless
+  template:
+    metadata:
+      labels:
+        k8s-app: browserless
+    spec:
+      serviceAccountName: browserless
+      containers:
+        - name: browserless
+          image: browserless/chrome:1.61.1-chrome-stable
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 1
+              memory: 1Gi
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: DEFAULT_LAUNCH_ARGS
+              value: "[\"--window-size=1920,1080\"]"
+          ports:
+            - containerPort: 3000
+              name: tcp-3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+      - name: dshm
+        emptyDir:
+          medium: Memory

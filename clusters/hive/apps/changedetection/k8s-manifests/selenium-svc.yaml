@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: selenium
+  name: browser-chrome
+  namespace: changedetection
+spec:
+  ports:
+    - name: selenium-4444
+      port: 4444
+      protocol: TCP
+      targetPort: 4444
+    - name: selenium-7900
+      port: 7900
+      protocol: TCP
+      targetPort: 7900
+  selector:
+    k8s-app: selenium
+  sessionAffinity: None
+  type: ClusterIP
