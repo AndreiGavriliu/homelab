@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hugo-gavriliu-com
+  labels:
+    k8s-app: hugo-gavriliu-com
+  namespace: hugo-gavriliu-com
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: hugo-gavriliu-com
+  template:
+    metadata:
+      labels:
+        k8s-app: hugo-gavriliu-com
+    spec:
+      containers:
+        - image: ghcr.io/andreigavriliu/gavriliu.com
+          imagePullPolicy: Always
+          name: hugo-gavriliu-com
+      imagePullSecrets:
+      - name: ghcr-login-secret

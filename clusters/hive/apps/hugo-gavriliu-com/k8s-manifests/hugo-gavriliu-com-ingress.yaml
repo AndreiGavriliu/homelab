@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hugo-gavriliu-com
+  namespace: hugo-gavriliu-com
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+spec:
+  rules:
+    - host: gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: hugo-gavriliu-com
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
