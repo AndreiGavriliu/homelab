@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umami
+  labels:
+    app: umami
+  namespace: umami
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: umami
+  template:
+    metadata:
+      labels:
+        app: umami
+    spec:
+      serviceAccountName: umami
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: ghcr.io/umami-software/umami:postgresql-v2.17.0
+          imagePullPolicy: Always
+          name: umami
+          env:
+            - name: IGNORE_IP
+              value: "10.0.0.0/8,192.168.0.0/16,172.16.0.0/20"
+            - name: DATABASE_TYPE
+              value: postgresql
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: umami
+                  key: DATABASE_URL
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: umami
+                  key: APP_SECRET

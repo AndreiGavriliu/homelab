@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: umami
+  namespace: umami
+  annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: umami.gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: umami
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix

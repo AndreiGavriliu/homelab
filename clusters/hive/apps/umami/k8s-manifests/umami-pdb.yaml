@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: umami
+  labels:
+    app: umami
+  namespace: umami
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: umami
