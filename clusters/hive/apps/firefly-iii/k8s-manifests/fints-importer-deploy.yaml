@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fints-importer
+  namespace: firefly-iii
+  labels:
+    k8s-app: fints-importer
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: fints-importer
+  template:
+    metadata:
+      labels:
+        k8s-app: fints-importer
+    spec:
+      containers:
+        - image: benkl/firefly-iii-fints-importer
+          name: fints-importer
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              # cpu: 100m
+              memory: 50Mi
+          ports:
+            - containerPort: 8080
+              name: fints-importer
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: fints-importer
+              mountPath: /data/configurations
+      volumes:
+        - name: fints-importer
+          secret:
+            secretName: fints-importer
+            items: 
+              - key: fints-importer-account-01.json
+                path: fints-importer-account-01.json
+              - key: fints-importer-account-02.json
+                path: fints-importer-account-02.json

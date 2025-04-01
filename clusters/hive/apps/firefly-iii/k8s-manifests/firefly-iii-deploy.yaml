@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firefly-iii
+  namespace: firefly-iii
+  labels:
+    k8s-app: firefly-iii
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: firefly-iii
+  template:
+    metadata:
+      labels:
+        k8s-app: firefly-iii
+    spec:
+      containers:
+        - image: fireflyiii/core:version-6.2.10
+          name: firefly-iii
+          resources:
+            requests:
+              cpu: 150m
+              memory: 300Mi
+            limits:
+              # cpu: 400m
+              memory: 300Mi
+          env:
+            - name: APP_ENV
+              value: "local"
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-iii
+                  key: APP_KEY
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: DB_HOST
+              value: "mariadb"
+            - name: DB_CONNECTION
+              value: "mysql"
+            - name: DB_DATABASE
+              value: "fireflyiii"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-iii
+                  key: DB_PASSWORD
+            - name: DB_USERNAME
+              value: "fireflyiii"
+            - name: TRUSTED_PROXIES
+              value: "**"
+            - name: ALLOW_WEBHOOKS
+              value: "true"
+            - name: APP_LOG_LEVEL
+              value: "false"
+          ports:
+            - containerPort: 8080
+              name: firefly-iii
+          volumeMounts:
+            - mountPath: "/var/www/html/firefly-iii/storage/upload"
+              name: firefly-iii-upload
+          imagePullPolicy: Always
+      volumes:
+        - name: firefly-iii-upload
+          persistentVolumeClaim:
+            claimName: firefly-iii-upload

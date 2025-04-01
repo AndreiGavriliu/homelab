@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fints-importer
+  namespace: firefly-iii
+  labels:
+    app: fints-importer
+spec:
+  ports:
+    - name: fints-importer
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    k8s-app: fints-importer
+  sessionAffinity: None
+  type: ClusterIP

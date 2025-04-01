@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  namespace: firefly-iii
+  labels:
+    k8s-app: mariadb
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: mariadb
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: mariadb
+    spec:
+      containers:
+        - image: lscr.io/linuxserver/mariadb:11.4.5
+          name: mariadb
+          resources:
+            requests:
+              cpu: 150m
+              memory: 300Mi
+            limits:
+              memory: 300Mi
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: MYSQL_DATABASE
+              value: "fireflyiii"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_USER
+              value: "fireflyiii"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: MYSQL_PASSWORD
+          ports:
+            - containerPort: 3306
+              name: mariadb
+          volumeMounts:
+            - name: mariadb
+              mountPath: /config
+      volumes:
+        - name: mariadb
+          persistentVolumeClaim:
+            claimName: mariadb

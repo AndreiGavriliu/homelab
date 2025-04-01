@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-account-01
+  namespace: firefly-iii
+spec:
+  schedule: "0 */4 * * *"
+  # suspend: "false"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronjob-account-01
+              image: curlimages/curl:8.12.1
+              imagePullPolicy: Always
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 50Mi
+                limits:
+                  # cpu: 100m
+                  memory: 50Mi
+              command:
+                - curl
+                - -v
+                - --location
+                - --request
+                - GET
+                - http://fints-importer:8080/?automate=true&config=fints-importer-account-01.json
+          restartPolicy: OnFailure

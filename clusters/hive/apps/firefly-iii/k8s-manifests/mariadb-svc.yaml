@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mariadb
+  name: mariadb
+  namespace: firefly-iii
+spec:
+  ports:
+    - port: 3306
+  selector:
+    k8s-app: mariadb
+  sessionAffinity: None
+  type: ClusterIP
