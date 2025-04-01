@@ -20,7 +20,7 @@ extraVolumes:
       secretName: renovate
 
 extraVolumeMounts:
-  - name: renovate-config
+  - name: renovate
     mountPath: /usr/src/app/config.json
     subPath: config.json
     readOnly: true
@@ -29,7 +29,7 @@ extraObjects:
   - apiVersion: v1
     kind: ConfigMap
     metadata:
-      name: {{ include "renovate.fullname" . }}-config
+      name: renovate
     data:
       config.json: |
         {
