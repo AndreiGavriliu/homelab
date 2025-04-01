@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rsync
+  labels:
+    app: rsync
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: rsync
+  template:
+    metadata:
+      labels:
+        app: rsync
+    spec:
+      serviceAccountName: rsync
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: rsync
+          image: eeacms/rsync:2.6
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              memory: 50Mi
+          command: [ "/bin/sh", "-c", "--" ]
+          args: [ "cd /paperless-ngx-media/documents/originals && while true; do rsync -avz --delete . /documents/; sleep 60; done" ]
+          volumeMounts:
+            - mountPath: /paperless-ngx-media
+              name: paperless-ngx-media
+            - name: documents
+              mountPath: /documents
+      volumes:
+        - name: paperless-ngx-media
+          persistentVolumeClaim:
+            claimName: paperless-ngx-media
+        - name: documents
+          nfs:
+            path: /volume1/documents
+            server: 10.0.0.10

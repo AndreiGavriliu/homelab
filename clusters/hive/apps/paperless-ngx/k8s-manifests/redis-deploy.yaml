@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      serviceAccountName: redis
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: redis:7.4
+          imagePullPolicy: Always
+          name: redis
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              # cpu: 100m
+              memory: 50Mi
+          volumeMounts:
+            - mountPath: /data
+              name: redis
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis

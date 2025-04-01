@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotenberg
+  labels:
+    app: gotenberg
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: gotenberg
+  template:
+    metadata:
+      labels:
+        app: gotenberg
+    spec:
+      serviceAccountName: gotenberg
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: gotenberg/gotenberg:8.19
+          imagePullPolicy: Always
+          name: gotenberg
+          command:
+            - "gotenberg"
+            - "--chromium-disable-javascript=true"
+            - "--chromium-allow-list=file:///tmp/.*"
+            - "--api-timeout=600s"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              # cpu: 400m
+              memory: 200Mi

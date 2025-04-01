@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: gotenberg
+  labels:
+    app: gotenberg
+  namespace: paperless-ngx
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: gotenberg

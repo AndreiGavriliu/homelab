@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: paperless-ngx
+  labels:
+    app: paperless-ngx
+  namespace: paperless-ngx
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: paperless-ngx

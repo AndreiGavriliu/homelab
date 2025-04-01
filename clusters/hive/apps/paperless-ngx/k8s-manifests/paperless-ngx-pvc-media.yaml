@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: paperless-ngx-media
+  namespace: paperless-ngx
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi

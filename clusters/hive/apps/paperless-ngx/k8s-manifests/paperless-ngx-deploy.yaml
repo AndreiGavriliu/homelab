@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx
+  labels:
+    app: paperless-ngx
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      serviceAccountName: paperless-ngx
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: ghcr.io/paperless-ngx/paperless-ngx:2.14.7
+          imagePullPolicy: Always
+          name: paperless-ngx
+          resources:
+            requests:
+              cpu: 600m
+              memory: 3300Mi
+            limits:
+              memory: 3300Mi
+          env:
+            - name: PAPERLESS_ADMIN_USER
+              value: "admin"
+            - name: PAPERLESS_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx
+                  key: PAPERLESS_ADMIN_PASSWORD
+            - name: PAPERLESS_REDIS
+              value: "redis://redis:6379"
+            - name: PAPERLESS_DBHOST
+              value: "postgres"
+            - name: PAPERLESS_TIKA_ENABLED
+              value: "1"
+            - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
+              value: "http://gotenberg:3000"
+            - name: PAPERLESS_TIKA_ENDPOINT
+              value: "http://tika:9998"
+            - name: PAPERLESS_CONSUMER_POLLING
+              value: "60"
+            - name: PAPERLESS_URL
+              value: "https://docs.gavriliu.com"
+            - name: PAPERLESS_CORS_ALLOWED_HOSTS
+              value: "https://docs.gavriliu.com"
+            - name: PAPERLESS_CONSUMER_RECURSIVE
+              value: "true"
+            - name: PAPERLESS_TASK_WORKERS
+              value: "2"
+            - name: PAPERLESS_CONSUMER_POLLING_RETRY_COUNT
+              value: "24"
+            - name: PAPERLESS_FILENAME_FORMAT
+              value: "{{owner_username}}/{{document_type}}/{{correspondent}}/{{created_year}}-{{created_month}}-{{created_day}} - {{title}}"
+            - name: PAPERLESS_DEBUG
+              value: "false"
+            - name: USERMAP_UID
+              value: "1000"
+            - name: USERMAP_GID
+              value: "1000"
+            - name: PAPERLESS_OCR_USER_ARGS
+              value: "{'invalidate_digital_signatures': true}"
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: paperless-ngx-data
+            - mountPath: /usr/src/paperless/media
+              name: paperless-ngx-media
+            - mountPath: /usr/src/paperless/export
+              name: paperless-ngx-export
+            - mountPath: /usr/src/paperless/consume
+              name: paperless-ngx-consume
+      volumes:
+        - name: paperless-ngx-data
+          persistentVolumeClaim:
+            claimName: paperless-ngx-data
+        - name: paperless-ngx-media
+          persistentVolumeClaim:
+            claimName: paperless-ngx-media
+        - name: paperless-ngx-consume
+          nfs:
+            path: /volume1/documents.scan/_paperless_consume
+            server: 10.0.0.10
+        - name: paperless-ngx-export
+          nfs:
+            path: /volume1/documents.scan/_paperless_export
+            server: 10.0.0.10

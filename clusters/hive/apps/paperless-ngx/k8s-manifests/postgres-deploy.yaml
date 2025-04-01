@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: postgres
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      serviceAccountName: postgres
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: postgres:17.4
+          name: postgres
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: POSTGRES_DB
+              value: "paperless"
+            - name: POSTGRES_USER
+              value: "paperless"
+            - name: PGDATA
+              value: "/var/lib/postgresql/data/pgdata"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 5432
+              name: postgres
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              memory: 200Mi
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-data
+      restartPolicy: Always
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres
