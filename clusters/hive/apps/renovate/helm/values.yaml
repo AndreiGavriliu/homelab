@@ -17,7 +17,8 @@ envFrom:
 renovate:
   config: |
     {
-      "platform": "github",
+      "platform": process.env.RENOVATE_PLATFORM,
+      "token": process.env.RENOVATE_GITHUB_COM_TOKEN,
       "autodiscover": false,
       "printConfig": true,
       "repositories": ["AndreiGavriliu/homelab"],
@@ -91,5 +92,9 @@ renovate:
           "updateTypes": ["major"],
           "labels": ["argocd-update", "major"]
         }
-      ]
+      ],
+      secrets: {
+        RENOVATE_GITHUB_COM_TOKEN: process.env.RENOVATE_GITHUB_COM_TOKEN,
+        RENOVATE_PLATFORM: process.env.RENOVATE_PLATFORM
+      }
     }
