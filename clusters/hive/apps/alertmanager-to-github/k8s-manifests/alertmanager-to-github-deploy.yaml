@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager-to-github
+  namespace: alertmanager-to-github
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alertmanager-to-github
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: alertmanager-to-github
+    spec:
+      containers:
+      - name: alertmanager-to-github
+        image: ghcr.io/pfnet-research/alertmanager-to-github:v0.1.7
+        env:
+        - name: ATG_LISTEN
+          value: ':8080'
+        - name: ATG_GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: alertmanager-to-github
+              key: ATG_GITHUB_TOKEN
+        - name: ATG_LABELS
+          value: alertmanager
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
