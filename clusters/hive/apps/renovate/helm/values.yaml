@@ -10,7 +10,7 @@ resources:
   limits:
     memory: 2000Mi
 
-existingSecret: renovate-env
+secrets: renovate-env
 
 renovate:
   config: |
