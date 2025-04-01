@@ -10,8 +10,9 @@ resources:
   limits:
     memory: 2000Mi
 
-existingSecret:
-  name: renovate
+envFrom:
+  - secretRef:
+      name: renovate
 
 renovate:
   config: |
