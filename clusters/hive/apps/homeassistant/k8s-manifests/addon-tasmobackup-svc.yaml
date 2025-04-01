@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: addon-tasmobackup
+  name: addon-tasmobackup
+  namespace: homeassistant
+spec:
+  ports:
+    - name: addon-tasmobackup
+      port: 80
+      protocol: TCP
+      targetPort: tcp-80
+  selector:
+    k8s-app: addon-tasmobackup
+  sessionAffinity: None
+  type: ClusterIP

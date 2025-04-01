@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addon-tasmoadmin
+  labels:
+    k8s-app: addon-tasmoadmin
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: addon-tasmoadmin
+  template:
+    metadata:
+      labels:
+        k8s-app: addon-tasmoadmin
+    spec:
+      serviceAccountName: addon-tasmoadmin
+      containers:
+        - image: ghcr.io/tasmoadmin/tasmoadmin:v4.2.3
+          imagePullPolicy: Always
+          name: tasmoadmin
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              # cpu: 200m
+              memory: 50Mi
+          volumeMounts:
+            - mountPath: /data
+              name: addon-tasmoadmin
+          ports:
+            - containerPort: 80
+              name: tcp-80
+              protocol: TCP
+      volumes:
+        - name: addon-tasmoadmin
+          persistentVolumeClaim:
+            claimName: addon-tasmoadmin

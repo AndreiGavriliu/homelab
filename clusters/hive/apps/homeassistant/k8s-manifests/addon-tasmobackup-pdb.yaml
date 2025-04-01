@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: addon-tasmobackup
+  labels:
+    k8s-app: addon-tasmobackup
+  namespace: homeassistant
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      k8s-app: addon-tasmobackup

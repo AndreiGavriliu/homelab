@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: addon-mariadb
+  name: addon-mariadb
+  namespace: homeassistant
+spec:
+  type: ClusterIP
+  ports:
+    - name: mariadb
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+  selector:
+    k8s-app: addon-mariadb
+  sessionAffinity: None

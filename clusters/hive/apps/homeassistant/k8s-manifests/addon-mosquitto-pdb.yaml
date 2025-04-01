@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: addon-mosquitto
+  labels:
+    app: addon-mosquitto
+  namespace: homeassistant
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: addon-mosquitto

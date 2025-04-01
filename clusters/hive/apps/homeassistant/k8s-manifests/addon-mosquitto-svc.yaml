@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: addon-mosquitto
+  name: addon-mosquitto
+  namespace: homeassistant
+spec:
+  type: NodePort
+  ports:
+    - name: mosquitto
+      port: 1883
+      targetPort: tcp-1883
+      nodePort: 31883
+  selector:
+    app: addon-mosquitto

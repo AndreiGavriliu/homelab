@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: addon-zigbee2mqtt
+  labels:
+    app: addon-zigbee2mqtt
+  namespace: homeassistant
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: addon-zigbee2mqtt

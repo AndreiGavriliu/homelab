@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: addon-vscode
+  labels:
+    app: addon-vscode
+  namespace: homeassistant
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: addon-vscode

@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: addon-tasmoadmin
+  namespace: homeassistant
+automountServiceAccountToken: false

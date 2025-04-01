@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: addon-tasmoadmin
+  name: addon-tasmoadmin
+  namespace: homeassistant
+spec:
+  ports:
+    - name: addon-tasmoadmin
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    k8s-app: addon-tasmoadmin
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: homeassistant
+  labels:
+    app: homeassistant
+  namespace: homeassistant
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: homeassistant

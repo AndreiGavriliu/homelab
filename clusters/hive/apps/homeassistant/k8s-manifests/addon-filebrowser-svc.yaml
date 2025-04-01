@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: addon-filebrowser
+  name: addon-filebrowser
+  namespace: homeassistant
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: tcp-80
+  selector:
+    app: addon-filebrowser
+  sessionAffinity: None
+  type: ClusterIP

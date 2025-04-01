@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: addon-zigbee2mqtt
+  name: addon-zigbee2mqtt
+  namespace: homeassistant
+spec:
+  ports:
+    - name: zigbee2mqtt
+      port: 8080
+      protocol: TCP
+      targetPort: tcp-8080
+  selector:
+    app: addon-zigbee2mqtt
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addon-influxdb
+  labels:
+    app: addon-influxdb
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: addon-influxdb
+  template:
+    metadata:
+      labels:
+        app: addon-influxdb
+    spec:
+      serviceAccountName: addon-influxdb
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: influxdb:1.11.8
+          imagePullPolicy: Always
+          name: influxdb
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1000Mi
+            limits:
+              # cpu: 100m
+              memory: 1000Mi
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: INFLUXDB_SUBSCRIBER_ENABLED
+              value: "false"
+            - name: INFLUXDB_DATA_QUERY_LOG_ENABLED
+              value: "false"
+          ports:
+            - containerPort: 8086
+              name: tcp-8086
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: addon-influxdb
+      volumes:
+        - name: addon-influxdb
+          persistentVolumeClaim:
+            claimName: addon-influxdb

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: addon-mosquitto-externalip
+  namespace: homeassistant
+  labels:
+    app: addon-mosquitto
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.0.0.41
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 1883
+    targetPort: tcp-1883
+  selector:
+    app: addon-mosquitto
+

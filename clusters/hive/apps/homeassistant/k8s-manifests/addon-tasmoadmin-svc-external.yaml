@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: addon-tasmoadmin-externalip
+  namespace: homeassistant
+  labels:
+    k8s-app: addon-tasmoadmin
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.0.0.43
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 30043
+      targetPort: 80
+  selector:
+    k8s-app: addon-tasmoadmin

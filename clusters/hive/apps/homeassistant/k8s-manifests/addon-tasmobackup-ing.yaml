@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: addon-tasmobackup
+  namespace: homeassistant
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: tasmobackup.home.gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: addon-tasmobackup
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

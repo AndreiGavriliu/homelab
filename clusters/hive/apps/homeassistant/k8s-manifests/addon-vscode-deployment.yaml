@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addon-vscode
+  labels:
+    app: addon-vscode
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: addon-vscode
+  template:
+    metadata:
+      labels:
+        app: addon-vscode
+    spec:
+      serviceAccountName: addon-vscode
+      containers:
+        - image: linuxserver/code-server:4.98.2
+          imagePullPolicy: Always
+          name: vscode
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
+            - name: DEFAULT_WORKSPACE
+              value: /workspace
+          resources:
+            requests:
+              cpu: 50m
+              memory: 350Mi
+            limits:
+              # cpu: 100m
+              memory: 350Mi
+          volumeMounts:
+            - name: addon-vscode
+              mountPath: /config
+            - name: homeassistant
+              mountPath: /workspace
+      volumes:
+        - name: addon-vscode
+          persistentVolumeClaim:
+            claimName: addon-vscode
+        - name: homeassistant
+          persistentVolumeClaim:
+            claimName: homeassistant

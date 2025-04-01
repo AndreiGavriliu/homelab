@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addon-mariadb
+  labels:
+    k8s-app: addon-mariadb
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: addon-mariadb
+  template:
+    metadata:
+      labels:
+        k8s-app: addon-mariadb
+    spec:
+      serviceAccountName: addon-mariadb
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - image: bitnami/mariadb:11.7.2
+          imagePullPolicy: Always
+          name: mariadb
+          resources:
+            requests:
+              cpu: 50m
+              memory: 900Mi
+            limits:
+              memory: 900Mi
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: addon-mariadb
+                  key: MARIADB_ROOT_PASSWORD
+            - name: MARIADB_DATABASE
+              value: "homeassistant"
+            - name: MARIADB_USER
+              value: "homeassistant"
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: addon-mariadb
+                  key: MARIADB_PASSWORD
+          volumeMounts:
+            - mountPath: /bitnami/mariadb
+              name: mariadb
+      volumes:
+        - name: mariadb
+          persistentVolumeClaim:
+            claimName: addon-mariadb

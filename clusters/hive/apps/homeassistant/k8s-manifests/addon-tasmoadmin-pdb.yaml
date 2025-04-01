@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: addon-tasmoadmin
+  labels:
+    k8s-app: addon-tasmoadmin
+  namespace: homeassistant
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      k8s-app: addon-tasmoadmin

@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: addon-tasmobackup-cronjob
+  labels:
+    k8s-app: addon-tasmoadmin
+  namespace: homeassistant
+spec:
+  schedule: "0 21 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            k8s-app: addon-tasmobackup
+        spec:
+          serviceAccountName: addon-tasmoadmin
+          containers:
+            - name: tasmobackup
+              image: curlimages/curl:8.12.1
+              imagePullPolicy: Always
+              resources:
+                requests:
+                  cpu: "50m"
+                  memory: 50Mi
+                limits:
+                  cpu: "50m"
+                  memory: 50Mi
+              command:
+                - curl
+                - https://tasmobackup.home.gavriliu.com/backupall.php
+          restartPolicy: OnFailure

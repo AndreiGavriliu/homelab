@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addon-tasmobackup
+  labels:
+    k8s-app: addon-tasmobackup
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: addon-tasmobackup
+  template:
+    metadata:
+      labels:
+        k8s-app: addon-tasmobackup
+    spec:
+      serviceAccountName: addon-tasmobackup
+      containers:
+        - image: danmed/tasmobackupv1:1.06.09
+          imagePullPolicy: Always
+          name: tasmobackup
+          resources:
+            requests:
+              cpu: 50m
+              memory: 150Mi
+            limits:
+              # cpu: 200m
+              memory: 150Mi
+          env:
+            - name: DBTYPE
+              value: "sqlite"
+            - name: DBNAME
+              value: "data/tasmobackup"
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: tcp-80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: tcp-80
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          ports:
+            - containerPort: 80
+              name: tcp-80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/www/html/data
+              name: addon-tasmobackup
+      volumes:
+        - name: addon-tasmobackup
+          persistentVolumeClaim:
+            claimName: addon-tasmobackup

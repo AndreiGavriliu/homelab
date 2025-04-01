@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeassistant
+  labels:
+    app: homeassistant
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      serviceAccount: homeassistant
+      hostNetwork: true
+      containers:
+        - image: ghcr.io/home-assistant/home-assistant:2025.3.4
+          imagePullPolicy: Always
+          name: homeassistant
+          resources:
+            requests:
+              cpu: 700m
+              memory: 1100Mi
+            limits:
+              memory: 1100Mi
+          securityContext:
+            privileged: true
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+          volumeMounts:
+            - mountPath: /config
+              name: homeassistant
+      volumes:
+        - name: homeassistant
+          persistentVolumeClaim:
+            claimName: homeassistant
