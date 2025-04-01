@@ -14,6 +14,8 @@ envFrom:
   - secretRef:
       name: renovate
 
+existingSecret: renovate
+
 renovate:
   config: |
     {
