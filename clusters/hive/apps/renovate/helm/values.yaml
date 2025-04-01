@@ -12,7 +12,7 @@ resources:
 
 envFrom:
   - secretRef:
-      name: renovate
+      name: renovate-env
 
 renovate:
   config: |
