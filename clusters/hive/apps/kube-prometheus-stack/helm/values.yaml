@@ -178,9 +178,9 @@ prometheus:
       honor_labels: true
       scheme: http
       metrics_path: '/k10/prometheus/federate'
-      params:
-        'match[]':
-          - '{__name__=~"jobs.*"}'
+      # params:
+      #   'match[]':
+      #     - '{__name__=~"jobs.*"}'
       static_configs:
         - targets:
           - 'prometheus-server.kasten-io.svc.cluster.local'
