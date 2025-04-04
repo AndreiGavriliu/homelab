@@ -19,7 +19,7 @@ spec:
       serviceAccount: addon-zigbee2mqtt
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:2.2.0
+          image: koenkk/zigbee2mqtt:2.2.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
