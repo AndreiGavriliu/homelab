@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
             - name: cronjob-account-01
-              image: curlimages/curl:8.12.1
+              image: curlimages/curl:8.13.0
               imagePullPolicy: Always
               resources:
                 requests:
