@@ -16,6 +16,11 @@ spec:
       labels:
         k8s-app: hugo-gavriliu-com
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      serviceAccountName: hugo-gavriliu-com
       containers:
         - image: ghcr.io/andreigavriliu/gavriliu.com
           imagePullPolicy: Always
