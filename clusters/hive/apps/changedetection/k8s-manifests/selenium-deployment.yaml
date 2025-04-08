@@ -23,7 +23,7 @@ spec:
         runAsGroup: 1201
       containers:
         - name: selenium
-          image: selenium/standalone-chrome:134.0
+          image: selenium/standalone-chrome:135.0
           imagePullPolicy: Always
           resources:
             requests:
