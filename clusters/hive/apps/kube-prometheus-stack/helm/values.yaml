@@ -143,6 +143,26 @@ additionalPrometheusRulesMap:
         labels:
           issue: Longhorn node {{$labels.node}} experiences high CPU pressure.
           severity: warning
+    - name: kasten.rules
+      rules:
+      - alert: K10BackupFailed
+        annotations:
+          description: K10 backup {{$labels.backup}} failed.
+          summary: K10 backup {{$labels.backup}} failed.
+        expr: k10_backup_status{status="failed"} > 0
+        for: 5m
+        labels:
+          issue: K10 backup {{$labels.backup}} failed.
+          severity: critical
+      - alert: K10BackupDuration
+        annotations:
+          description: K10 backup {{$labels.backup}} took {{$value}} seconds.
+          summary: K10 backup {{$labels.backup}} took more than 2 hour.
+        expr: k10_backup_duration_seconds > 7200
+        for: 5m
+        labels:
+          issue: K10 backup {{$labels.backup}} took more than 1 hour.
+          severity: warning
 
 global:
   rbac:
