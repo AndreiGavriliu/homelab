@@ -87,10 +87,10 @@ additionalPrometheusRulesMap:
       - alert: LonghornVolumeStatusWarning
         annotations:
           description: Longhorn volume {{$labels.volume}} on {{$labels.node}} is Degraded for
-            more than 5 minutes.
+            more than 10 minutes.
           summary: Longhorn volume {{$labels.volume}} is Degraded
         expr: longhorn_volume_robustness == 2
-        for: 5m
+        for: 10m
         labels:
           issue: Longhorn volume {{$labels.volume}} is Degraded.
           severity: warning
