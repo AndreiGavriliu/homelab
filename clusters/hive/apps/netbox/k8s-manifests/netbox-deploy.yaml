@@ -106,7 +106,7 @@ spec:
                   name: netbox
             - name: WEBHOOKS_ENABLED
               value: "true"
-          image: netboxcommunity/netbox:v4.2.6
+          image: netboxcommunity/netbox:v4.2.7
           imagePullPolicy: Always
           name: netbox
           volumeMounts:
