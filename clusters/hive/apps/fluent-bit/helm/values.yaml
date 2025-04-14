@@ -73,6 +73,12 @@ config:
         Systemd_Filter _SYSTEMD_UNIT=kubelet.service
         Read_From_Tail On
 
+    [INPUT]
+        Name              kubernetes_events
+        Tag               kube.events
+        Buffer_Batch_Size 10
+        Buffer_Chunk_Size 1M
+
   ## https://docs.fluentbit.io/manual/pipeline/filters
   filters: |
     [FILTER]
