@@ -94,6 +94,11 @@ config:
         Match *
         Add host ${HOSTNAME}
 
+    [FILTER]
+        Name                modify
+        Match               kube.events
+        Copy                message short_message
+
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
