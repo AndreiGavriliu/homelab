@@ -74,10 +74,9 @@ config:
         Read_From_Tail On
 
     [INPUT]
-        Name              kubernetes_events
-        Tag               kube.events
-        Buffer_Batch_Size 10
-        Buffer_Chunk_Size 1M
+        Name            kubernetes_events
+        Tag             kube.events
+        Interval_Sec    5
 
   ## https://docs.fluentbit.io/manual/pipeline/filters
   filters: |
