@@ -15,6 +15,6 @@ spec:
               service:
                 name: hugo-gavriliu-com
                 port:
-                  number: 80
+                  number: 8080
             path: /
             pathType: Prefix

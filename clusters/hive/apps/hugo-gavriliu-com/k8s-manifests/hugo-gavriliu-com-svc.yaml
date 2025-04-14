@@ -9,9 +9,9 @@ spec:
   sessionAffinity: ClientIP
   ports:
     - name: hugo-gavriliu-com
-      port: 80
+      port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   selector:
     k8s-app: hugo-gavriliu-com
   sessionAffinity: None
