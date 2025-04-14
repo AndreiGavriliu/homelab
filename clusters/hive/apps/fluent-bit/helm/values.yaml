@@ -82,7 +82,8 @@ config:
   filters: |
     [FILTER]
         Name kubernetes
-        Match kube.*
+        Match               kube.var.log.containers.*
+        Kube_Tag_Prefix     kube.var.log.containers.
         Merge_Log On
         Keep_Log Off
         K8S-Logging.Parser On
