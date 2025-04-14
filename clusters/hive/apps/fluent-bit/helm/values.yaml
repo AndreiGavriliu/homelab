@@ -142,3 +142,8 @@ logLevel: info
 
 hotReload:
   enabled: false
+
+rbac:
+  create: true
+  nodeAccess: false
+  eventsAccess: true
