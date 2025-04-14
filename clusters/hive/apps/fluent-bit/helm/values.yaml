@@ -73,14 +73,14 @@ config:
         Systemd_Filter _SYSTEMD_UNIT=kubelet.service
         Read_From_Tail On
 
-    [INPUT]
-        Name            kubernetes_events
-        Tag             kube.events
-        Interval_Sec    5
-        Kube_URL              https://kubernetes.default.svc:443
-        Kube_CA_File          /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        Kube_Token_File       /var/run/secrets/kubernetes.io/serviceaccount/token
-        Kube_Retention_Time   10
+    # [INPUT]
+    #     Name            kubernetes_events
+    #     Tag             kube.events
+    #     Interval_Sec    5
+    #     Kube_URL              https://kubernetes.default.svc:443
+    #     Kube_CA_File          /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    #     Kube_Token_File       /var/run/secrets/kubernetes.io/serviceaccount/token
+    #     Kube_Retention_Time   10
 
   ## https://docs.fluentbit.io/manual/pipeline/filters
   filters: |
@@ -98,10 +98,10 @@ config:
         Match *
         Add host ${HOSTNAME}
 
-    [FILTER]
-        Name    modify
-        Match   kube.events
-        Set     short_message ${kubernetes_event.message}
+    # [FILTER]
+    #     Name    modify
+    #     Match   kube.events
+    #     Set     short_message ${kubernetes_event.message}
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
