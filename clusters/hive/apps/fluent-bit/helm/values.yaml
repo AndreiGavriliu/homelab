@@ -95,9 +95,9 @@ config:
         Add host ${HOSTNAME}
 
     [FILTER]
-        Name                modify
-        Match               kube.events
-        Copy                message short_message
+        Name    modify
+        Match   kube.events
+        Set     short_message ${kubernetes_event.message}
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
