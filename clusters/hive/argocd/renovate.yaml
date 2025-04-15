@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://docs.renovatebot.com/helm-charts
     chart: renovate
-    targetRevision: "39.242.2"
+    targetRevision: "39.243.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/renovate/helm/values.yaml
