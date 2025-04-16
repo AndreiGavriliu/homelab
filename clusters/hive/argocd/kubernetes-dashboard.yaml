@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://kubernetes.github.io/dashboard
     chart: kubernetes-dashboard
-    targetRevision: "7.11.1"
+    targetRevision: "7.12.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/kubernetes-dashboard/helm/values.yaml
