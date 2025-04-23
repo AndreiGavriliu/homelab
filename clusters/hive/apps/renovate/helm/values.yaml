@@ -90,6 +90,11 @@ renovate:
           "matchManagers": ["argocd"],
           "updateTypes": ["major"],
           "labels": ["argocd-update", "major"]
+        },
+        {
+          "matchPaths": ["clusters/hive/apps/renovate/helm/values.yaml"],
+          "automerge": true,
+          "automergeType": "branch"
         }
       ]
     }
