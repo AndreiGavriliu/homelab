@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress
+  namespace: dugulan-com
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: dugulan-com.gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: wordpress
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

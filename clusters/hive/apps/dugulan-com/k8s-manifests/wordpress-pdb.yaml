@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: wordpress
+  labels:
+    k8s-app: wordpress
+  namespace: dugulan-com
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      k8s-app: wordpress

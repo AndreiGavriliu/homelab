@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: wordpress
+  name: wordpress
+  namespace: dugulan-com
+spec:
+  type: ClusterIP
+  ports:
+    - name: wordpress
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    k8s-app: wordpress
+  sessionAffinity: None
