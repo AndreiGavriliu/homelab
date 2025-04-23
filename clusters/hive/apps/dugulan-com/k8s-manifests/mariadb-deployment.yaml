@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  labels:
+    k8s-app: mariadb
+  namespace: dugulan-com
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: mariadb
+  template:
+    metadata:
+      labels:
+        k8s-app: mariadb
+    spec:
+      serviceAccountName: mariadb
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - image: bitnami/mariadb:11.7.2
+          imagePullPolicy: Always
+          name: mariadb
+          resources:
+            requests:
+              cpu: 50m
+              memory: 900Mi
+            limits:
+              memory: 900Mi
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: MARIADB_ROOT_PASSWORD
+            - name: MARIADB_DATABASE
+              value: "wordpress"
+            - name: MARIADB_USER
+              value: "wordpress"
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: MARIADB_PASSWORD
+          volumeMounts:
+            - mountPath: /bitnami/mariadb
+              name: mariadb
+      volumes:
+        - name: mariadb
+          persistentVolumeClaim:
+            claimName: mariadb

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    k8s-app: wordpress
+  namespace: dugulan-com
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: wordpress
+  template:
+    metadata:
+      labels:
+        k8s-app: wordpress
+    spec:
+      serviceAccountName: wordpress
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - image: bitnami/wordpress:6.8.0
+          imagePullPolicy: Always
+          name: wordpress
+          resources:
+            requests:
+              cpu: 50m
+              memory: 900Mi
+            limits:
+              memory: 900Mi
+          env:
+            - name: WORDPRESS_DATABASE_NAME
+              value: "wordpress"
+            - name: WORDPRESS_DATABASE_USER
+              value: "wordpress"
+            - name: WORDPRESS_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DATABASE_PASSWORD
+          volumeMounts:
+            - mountPath: /bitnami/wordpress
+              name: wordpress
+      volumes:
+        - name: wordpress
+          persistentVolumeClaim:
+            claimName: wordpress
