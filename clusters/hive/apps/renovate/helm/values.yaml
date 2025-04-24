@@ -36,6 +36,7 @@ renovate:
       },
       "dependencyDashboard": true,
       "additionalBranchPrefix": "{{baseDir}}-",
+      "deleteBranchAfterMerge": true,
       "packageRules": [
         {
           "matchPackageNames": ["lscr.io/linuxserver/calibre-web"],
@@ -64,7 +65,6 @@ renovate:
           "updateTypes": ["minor", "patch"],
           "automerge": true,
           "automergeType": "branch",
-          "deleteBranchAfterMerge": true
         },
         {
           "matchManagers": ["helm-values"],
