@@ -60,6 +60,13 @@ renovate:
           "versioning": "regex:^version-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
         },
         {
+          "matchPaths": ["clusters/hive/argocd/renovate.yaml"],
+          "updateTypes": ["minor", "patch"],
+          "automerge": true,
+          "automergeType": "branch",
+          "deleteBranchAfterMerge": true
+        },
+        {
           "matchManagers": ["helm-values"],
           "matchPaths": ["^clusters/hive/apps/[^/]+/helm/values\\.ya?ml$"],
           "updateTypes": ["minor", "patch"],
@@ -90,13 +97,6 @@ renovate:
           "matchManagers": ["argocd"],
           "updateTypes": ["major"],
           "labels": ["argocd-update", "major"]
-        },
-        {
-          "matchPaths": ["clusters/hive/argocd/renovate.yaml"],
-          "updateTypes": ["minor", "patch"],
-          "automerge": true,
-          "automergeType": "branch",
-          "deleteBranchAfterMerge": true
         }
       ]
     }
