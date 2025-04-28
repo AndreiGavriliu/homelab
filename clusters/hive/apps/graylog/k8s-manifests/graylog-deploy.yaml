@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: graylog
       containers:
-        - image: graylog/graylog:6.1.10
+        - image: graylog/graylog:6.2.0
           imagePullPolicy: Always
           name: graylog
           ports:
