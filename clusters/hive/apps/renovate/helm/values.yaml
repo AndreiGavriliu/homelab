@@ -25,6 +25,13 @@ renovate:
       "ignorePaths": [
         "archive/"
       ],
+      "hostRules": [
+        {
+          "matchHost": "ghcr.io",
+          "username": "AndreiGavriliu",
+          "password": "{{env RENOVATE_GITHUB_COM_TOKEN}}"
+        }
+      ],
       "kubernetes": {
         "fileMatch": ["^clusters/hive/apps/[^/]+/k8s-manifests/.*\\.ya?ml$"]
       },
