@@ -26,5 +26,11 @@ spec:
         - image: ghcr.io/andreigavriliu/gavriliu.com:v0.4.7
           imagePullPolicy: Always
           name: hugo-gavriliu-com
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 128Mi
       imagePullSecrets:
       - name: ghcr-login-secret
