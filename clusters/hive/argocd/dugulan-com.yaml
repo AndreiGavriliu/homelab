@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netdugulan-combox
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dugulan-com
+  project: default
+  source:
+    path: clusters/hive/apps/dugulan-com/k8s-manifests
+    repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
