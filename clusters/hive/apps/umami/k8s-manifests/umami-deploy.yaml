@@ -29,7 +29,7 @@ spec:
             - name: IGNORE_IP
               value: "10.0.0.0/8,192.168.0.0/16,172.16.0.0/20"
             - name: DISABLE_BOT_CHECK
-              value: "0"
+              value: "1"
             - name: DATABASE_TYPE
               value: postgresql
             - name: DATABASE_URL
