@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: opensearchproject/opensearch:2.19.1
+        - image: opensearchproject/opensearch:2.19.2
           imagePullPolicy: Always
           name: opensearch
           env:
