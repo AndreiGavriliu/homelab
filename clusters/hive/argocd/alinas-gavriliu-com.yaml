@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: alinas-gavriliu-com
+  name: adinas-gavriliu-com
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: alinas-gavriliu-com
+    namespace: adinas-gavriliu-com
   project: default
   source:
-    path: clusters/hive/apps/alinas-gavriliu-com/k8s-manifests
+    path: clusters/hive/apps/adinas-gavriliu-com/k8s-manifests
     repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: HEAD
   syncPolicy:
