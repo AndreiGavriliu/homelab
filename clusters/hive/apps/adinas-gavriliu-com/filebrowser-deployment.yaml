@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filebrowser
+  labels:
+    app: filebrowser
+  namespace: adinas-gavriliu-com
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: filebrowser
+  template:
+    metadata:
+      labels:
+        app: filebrowser
+    spec:
+      serviceAccountName: filebrowser
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - name: filebrowser
+          image: filebrowser/filebrowser:v2.32.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: tcp-80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi 
+            limits:
+              # cpu: 100m
+              memory: 50Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: tcp-80
+            failureThreshold: 1
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: tcp-80
+            failureThreshold: 30
+            periodSeconds: 10
+          volumeMounts:
+            - mountPath: /.filebrowser.json
+              subPath: filebrowser.json
+              name: filebrowser-configmap
+            - mountPath: /srv
+              name: filebrowser-srv
+      volumes:
+        - name: filebrowser-configmap
+          configMap:
+            name: filebrowser
+        - name: filebrowser-srv
+          persistentVolumeClaim:
+            claimName: filebrowser
