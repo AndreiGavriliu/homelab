@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: mongo:8.0.8
+        - image: mongo:8.0.9
           imagePullPolicy: Always
           name: mongodb
           env:
