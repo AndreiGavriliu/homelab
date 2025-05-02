@@ -35,8 +35,6 @@ spec:
               value: "wordpress"
             - name: WORDPRESS_DATABASE_USER
               value: "wordpress"
-            - name: WORDPRESS_ENABLE_HTTPS
-              value: "yes"
             - name: WORDPRESS_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:

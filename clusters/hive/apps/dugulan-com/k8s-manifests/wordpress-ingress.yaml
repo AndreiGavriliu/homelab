@@ -15,7 +15,7 @@ spec:
               service:
                 name: wordpress
                 port:
-                  number: 8443
+                  number: 8080
             path: /
             pathType: Prefix
     - host: www.dugulan.com
@@ -25,6 +25,6 @@ spec:
               service:
                 name: wordpress
                 port:
-                  number: 8443
+                  number: 8080
             path: /
             pathType: Prefix
