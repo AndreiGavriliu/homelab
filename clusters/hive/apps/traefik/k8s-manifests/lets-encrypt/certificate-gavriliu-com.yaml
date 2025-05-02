@@ -10,6 +10,8 @@ spec:
     - "*.gavriliu.com"
     - "*.hive.gavriliu.com"
     - "*.home.gavriliu.com"
+    - "dugulan.com"
+    - "*.dugulan.com"
   issuerRef:
     name: cloudflare
     kind: Issuer
