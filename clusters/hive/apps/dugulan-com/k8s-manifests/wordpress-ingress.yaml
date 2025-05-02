@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: dugulan-com.gavriliu.com
+    - host: dugulan.com
       http:
         paths:
           - backend:
