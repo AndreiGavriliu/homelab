@@ -9,9 +9,9 @@ spec:
   type: ClusterIP
   ports:
     - name: wordpress
-      port: 8443
+      port: 8080
       protocol: TCP
-      targetPort: 8443
+      targetPort: 8080
   selector:
     k8s-app: wordpress
   sessionAffinity: None
