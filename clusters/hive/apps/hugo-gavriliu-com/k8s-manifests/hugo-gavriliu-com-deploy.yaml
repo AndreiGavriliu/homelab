@@ -23,7 +23,7 @@ spec:
         # allowPrivilegeEscalation: false
       serviceAccountName: hugo-gavriliu-com
       containers:
-        - image: ghcr.io/andreigavriliu/gavriliu.com:v0.4.9
+        - image: ghcr.io/andreigavriliu/gavriliu.com
           imagePullPolicy: Always
           name: hugo-gavriliu-com
           resources:
