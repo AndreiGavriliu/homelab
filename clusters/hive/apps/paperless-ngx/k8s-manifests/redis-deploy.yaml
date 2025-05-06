@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: redis:7.4
+        - image: redis:8.0
           imagePullPolicy: Always
           name: redis
           resources:
