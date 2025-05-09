@@ -37,7 +37,7 @@ spec:
               memory: 100Mi
             limits:
               memory: 100Mi
-          image: postgres:17.4-alpine
+          image: postgres:17.5-alpine
           name: postgres
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
