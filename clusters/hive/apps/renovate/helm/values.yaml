@@ -47,7 +47,8 @@ renovate:
           ],
           "depNameTemplate": "k3s",
           "datasourceTemplate": "github-releases",
-          "packageNameTemplate": "k3s-io/k3s"
+          "packageNameTemplate": "k3s-io/k3s",
+          "labels": ["k3s update"]
         }
       ],
       "packageRules": [
