@@ -39,20 +39,17 @@ renovate:
       },
       "dependencyDashboard": true,
       "additionalBranchPrefix": "{{baseDir}}-",
-      {
-        "extends": ["config:base"],
-        "regexManagers": [
-          {
-            "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/k3s-upgrade.yaml$"],
-            "matchStrings": [
-              "version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
-            ],
-            "depNameTemplate": "k3s",
-            "datasourceTemplate": "github-releases",
-            "packageNameTemplate": "k3s-io/k3s"
-          }
-        ]
-      },
+      "regexManagers": [
+        {
+          "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/k3s-upgrade.yaml$"],
+          "matchStrings": [
+            "version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
+          ],
+          "depNameTemplate": "k3s",
+          "datasourceTemplate": "github-releases",
+          "packageNameTemplate": "k3s-io/k3s"
+        }
+      ],
       "packageRules": [
         {
           "matchPackageNames": ["lscr.io/linuxserver/calibre-web"],
