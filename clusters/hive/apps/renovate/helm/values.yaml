@@ -11,7 +11,7 @@ resources:
     memory: 2000Mi
 
 env:
-  LOG_LEVEL: debug
+  LOG_LEVEL: info
 
 envFrom:
   - secretRef:
