@@ -62,7 +62,8 @@ renovate:
         {
           "matchDatasources": ["docker"],
           "matchPackageNames": ["ghcr.io/umami-software/umami"],
-          "versioning": "regex:^postgresql-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+          "matchTagPrefixes": ["postgresql-v"],
+          "versioning": "semver"
         },
         {
           "matchManagers": ["helm-values"],
