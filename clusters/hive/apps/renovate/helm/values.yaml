@@ -62,35 +62,34 @@ renovate:
         {
           "matchDatasources": ["docker"],
           "matchPackageNames": ["ghcr.io/umami-software/umami"],
-          "matchTagPrefixes": ["postgresql-v"],
-          "versioning": "semver"
+          "versioning": "regex:^postgresql-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
         },
         {
           "matchManagers": ["helm-values"],
           "matchPaths": ["^clusters/hive/apps/[^/]+/helm/values\\.ya?ml$"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["helm-update", "minor-or-patch"]
+          "labels": ["helm update", "minor or patch"]
         },
         {
           "matchManagers": ["helm-values"],
           "matchPaths": ["^clusters/hive/apps/[^/]+/helm/values\\.ya?ml$"],
           "updateTypes": ["major"],
-          "labels": ["helm-update", "major"]
+          "labels": ["helm update", "major"]
         },
         {
           "matchManagers": ["kubernetes"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["kubernetes-update", "minor-or-patch"]
+          "labels": ["kubernetes update", "minor or patch"]
         },
         {
           "matchManagers": ["kubernetes"],
           "updateTypes": ["major"],
-          "labels": ["kubernetes-update", "major"]
+          "labels": ["kubernetes update", "major"]
         },
         {
           "matchManagers": ["argocd"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["argocd-update", "minor-or-patch"]
+          "labels": ["argocd-update", "minor or patch"]
         },
         {
           "matchManagers": ["argocd"],
