@@ -24,7 +24,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: postgres:17.4
+        - image: postgres:17.5
           name: postgres
           env:
             - name: TZ
