@@ -1,18 +1,18 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: server-plan
+  name: k3s-server-upgrade
   namespace: system-upgrade
 spec:
   concurrency: 1
-  cordon: true
   nodeSelector:
     matchExpressions:
-    - key: node-role.kubernetes.io/control-plane
-      operator: In
-      values:
-      - "true"
+    - key: k3s.io/hostname
+      operator: Exists
   serviceAccountName: system-upgrade
   upgrade:
-    image: rancher/k3s-upgrade
+    image: rancher/k3s-upgrade:v1.29.3+k3s1
+  channel: stable
+  cordon: true
+  drain: true
   version: v1.32.3+k3s1
