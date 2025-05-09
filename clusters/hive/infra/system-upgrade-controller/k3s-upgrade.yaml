@@ -15,4 +15,4 @@ spec:
   channel: stable
   cordon: true
   drain: true
-  version: v1.32.3+k3s1
+  version: v1.33.0+k3s1
