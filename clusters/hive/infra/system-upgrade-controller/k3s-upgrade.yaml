@@ -11,7 +11,7 @@ spec:
       operator: Exists
   serviceAccountName: system-upgrade
   upgrade:
-    image: rancher/k3s-upgrade:v1.29.3+k3s1
+    image: rancher/k3s-upgrade:v1.32.3+k3s1
   channel: stable
   cordon: true
   drain: true
