@@ -43,7 +43,7 @@ renovate:
         "extends": ["config:base"],
         "regexManagers": [
           {
-            "fileMatch": ["k3s-upgrade.yaml$"],
+            "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/k3s-upgrade.yaml$"],
             "matchStrings": [
               "version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
             ],
