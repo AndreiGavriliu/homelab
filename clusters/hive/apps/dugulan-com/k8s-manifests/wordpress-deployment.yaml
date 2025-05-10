@@ -21,7 +21,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
       containers:
-        - image: bitnami/wordpress:6.8.0
+        - image: bitnami/wordpress:6.8.1
           imagePullPolicy: Always
           name: wordpress
           resources:
