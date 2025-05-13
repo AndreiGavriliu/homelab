@@ -1,0 +1,19 @@
+global:
+  domain: argocd.gavriliu.com
+
+configs:
+  params:
+    server.insecure: true
+
+server:
+  ingress:
+    enabled: true
+    controller: generic
+    labels: {}
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+    ingressClassName: traefik
+    hostname: "argocd.gavriliu.com"
+    path: /
+    pathType: Prefix
+    tls: false
