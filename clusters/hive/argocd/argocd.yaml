@@ -4,17 +4,23 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
-  project: default
   destination:
-    server: "https://kubernetes.default.svc"
+    server: https://kubernetes.default.svc
     namespace: argocd
+  project: default
   sources:
   - repoURL: https://argoproj.github.io/argo-helm
-    chart: argo-cd
-    targetRevision: "*"
+    chart: argocd
+    targetRevision: "7.6.5"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/argocd/helm/values.yaml
   - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: main
     ref: values
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
