@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: karakeep
-          image: ghcr.io/karakeep-app/karakeep
+          image: ghcr.io/karakeep-app/karakeep:0.2.41
           imagePullPolicy: Always
           resources:
             requests:
