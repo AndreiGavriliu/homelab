@@ -14,7 +14,7 @@ spec:
     targetRevision: "*"
     helm:
       valueFiles:
-      - $values/applications/argocd/helm/values.yaml
+      - $values/clusters/hive/apps/argocd/helm/values.yaml
   - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: main
     ref: values
