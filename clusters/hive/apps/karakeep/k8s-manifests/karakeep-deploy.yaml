@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karakeep
+  namespace: karakeep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karakeep
+  template:
+    metadata:
+      labels:
+        app: karakeep
+    spec:
+      containers:
+        - name: karakeep
+          image: ghcr.io/karakeep-app/karakeep
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+            limits:
+              memory: 700Mi
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MEILI_ADDR
+              value: http://meilisearch:7700
+            - name: BROWSER_WEB_URL
+              value: http://chrome:9222
+            - name: DATA_DIR
+              value: /data
+            - name: NEXTAUTH_URL
+              value: "http://localhost:3000"
+            - name: KARAKEEP_VERSION
+              value: "release"
+            - name: DISABLE_SIGNUPS
+              value: "true"
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep
+                  key: NEXTAUTH_SECRET
+            - name: NEXT_PUBLIC_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep
+                  key: NEXT_PUBLIC_SECRET
+          volumeMounts:
+            - mountPath: /data
+              name: karakeep
+          envFrom:
+            - secretRef:
+                name: karakeep
+            - configMapRef:
+                name: karakeep
+      volumes:
+        - name: karakeep
+          persistentVolumeClaim:
+            claimName: karakeep
