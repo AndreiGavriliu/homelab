@@ -10,8 +10,8 @@ spec:
   project: default
   sources:
   - repoURL: https://argoproj.github.io/argo-helm
-    chart: argocd
-    targetRevision: "v2.12.4"
+    chart: argo
+    targetRevision: "7.6.5"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/argocd/helm/values.yaml
