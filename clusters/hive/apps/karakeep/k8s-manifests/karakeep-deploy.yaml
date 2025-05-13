@@ -38,6 +38,14 @@ spec:
               value: "release"
             - name: DISABLE_SIGNUPS
               value: "true"
+            - name: CRAWLER_DOWNLOAD_BANNER_IMAGE
+              value: "true"
+            - name: CRAWLER_STORE_SCREENSHOT
+              value: "true"
+            - name: CRAWLER_FULL_PAGE_SCREENSHOT
+              value: "true"
+            - name: CRAWLER_FULL_PAGE_ARCHIVE
+              value: "true"
             - name: NEXTAUTH_SECRET
               valueFrom:
                 secretKeyRef:
