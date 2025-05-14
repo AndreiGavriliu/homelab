@@ -17,3 +17,16 @@ server:
     path: /
     pathType: Prefix
     tls: false
+
+  metrics:
+    enabled: true
+    service:
+      serviceMonitor:
+        enabled: true
+
+controller:
+  metrics:
+    enabled: true
+    service:
+      serviceMonitor:
+        enabled: true
