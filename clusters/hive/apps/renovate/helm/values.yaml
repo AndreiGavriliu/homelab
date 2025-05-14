@@ -104,12 +104,12 @@ renovate:
         {
           "matchManagers": ["argocd"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["argocd-update", "minor or patch"]
+          "labels": ["argocd update", "minor or patch"]
         },
         {
           "matchManagers": ["argocd"],
           "updateTypes": ["major"],
-          "labels": ["argocd-update", "major"]
+          "labels": ["argocd update", "major"]
         }
       ]
     }
