@@ -56,6 +56,11 @@ spec:
                 secretKeyRef:
                   name: karakeep
                   key: NEXT_PUBLIC_SECRET
+            - name: MEILI_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: meilisearch
+                  key: MEILI_MASTER_KEY
           volumeMounts:
             - mountPath: /data
               name: karakeep
