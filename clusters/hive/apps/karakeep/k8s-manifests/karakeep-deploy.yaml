@@ -64,11 +64,6 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: karakeep
-          envFrom:
-            - secretRef:
-                name: karakeep
-            - configMapRef:
-                name: karakeep
       volumes:
         - name: karakeep
           persistentVolumeClaim:
