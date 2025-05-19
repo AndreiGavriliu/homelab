@@ -41,7 +41,7 @@ renovate:
       "additionalBranchPrefix": "{{baseDir}}-",
       "regexManagers": [
         {
-          "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/.*\\.ya?ml$"],
+          "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/plans/.*\\.ya?ml$"],
           "matchStrings": [
             "version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
           ],
