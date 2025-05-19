@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: system-upgrade
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: system-upgrade
+  project: default
+  source:
+    path: clusters/hive/infra/system-upgrade-controller
+    repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
