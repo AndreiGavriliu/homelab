@@ -313,7 +313,7 @@ prometheus:
     - job_name: ingress-blackbox
       metrics_path: /probe
       params:
-        module: [https_with_cert_check]
+        module: [http_2xx]
       kubernetes_sd_configs:
         - role: ingress
       relabel_configs:
