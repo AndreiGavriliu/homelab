@@ -252,6 +252,22 @@ additionalPrometheusRulesMap:
         "for": "1m"
         "labels":
           "severity": "warning"
+    - name: blackbox-exporter.rules
+      rules:
+      - alert: IngressDown
+        expr: probe_success == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Ingress {{ $labels.instance }} is unreachable"
+      - alert: CertExpiringSoon
+        expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 7
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "TLS cert for {{ $labels.instance }} expires in < 7 days"
 global:
   rbac:
     create: true
@@ -294,3 +310,16 @@ prometheus:
           - 'prometheus-server.kasten-io.svc.cluster.local'
           labels:
             app: "k10"
+    - job_name: ingress-blackbox
+      metrics_path: /probe
+      params:
+        module: [https_with_cert_check]
+      kubernetes_sd_configs:
+        - role: ingress
+      relabel_configs:
+        - source_labels: [__meta_kubernetes_ingress_host]
+          target_label: __param_target
+        - source_labels: [__param_target]
+          target_label: instance
+        - target_label: __address__
+          replacement: blackbox-exporter.kube-prometheus-stack.svc.cluster.local:9115
