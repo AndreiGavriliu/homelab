@@ -1,0 +1,19 @@
+config:
+  modules:
+    http_2xx:
+      prober: http
+      timeout: 5s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+        follow_redirects: true
+        preferred_ip_protocol: "ip4"
+    https_with_cert_check:
+      prober: http
+      timeout: 5s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+        follow_redirects: true
+        method: GET
+        tls_config:
+          insecure_skip_verify: false
+        preferred_ip_protocol: "ip4"
