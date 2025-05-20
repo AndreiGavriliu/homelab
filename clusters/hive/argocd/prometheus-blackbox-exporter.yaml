@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: prometheus-blackbox-exporter
-  namespace: argocd
+  namespace: kube-prometheus-stack
 spec:
   destination:
     server: https://kubernetes.default.svc
