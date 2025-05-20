@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kube-prometheus-stack
+  name: prometheus-blackbox-exporter
   namespace: argocd
 spec:
   destination:
@@ -10,7 +10,7 @@ spec:
   project: default
   sources:
   - repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
+    chart: prometheus-blackbox-exporter
     targetRevision: "9.6.0"
     helm:
       valueFiles:
