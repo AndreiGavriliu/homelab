@@ -19,4 +19,3 @@ spec:
   upgrade:
     image: rancher/k3s-upgrade
   version: v1.33.0+k3s1
-  ttlSecondsAfterFinished: 3600
