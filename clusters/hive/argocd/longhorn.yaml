@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://charts.longhorn.io
     chart: longhorn
-    targetRevision: "1.8.1"
+    targetRevision: "1.9.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/longhorn-system/helm/values.yaml
