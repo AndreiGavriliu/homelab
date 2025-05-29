@@ -1,5 +1,5 @@
 cronjob:
-  schedule: '0 */6 * * *'
+  schedule: '0 1 * * *'
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
 
