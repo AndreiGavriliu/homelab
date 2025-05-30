@@ -35,7 +35,7 @@ spec:
               memory: 100Mi
             limits:
               memory: 100Mi
-          image: redis:8.0.1-alpine
+          image: redis:8.0.2-alpine
           name: redis
           volumeMounts:
             - mountPath: /data
