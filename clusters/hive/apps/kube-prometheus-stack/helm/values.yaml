@@ -268,6 +268,17 @@ additionalPrometheusRulesMap:
           severity: warning
         annotations:
           summary: "TLS cert for {{ $labels.instance }} expires in < 7 days"
+    - name: oomkilled.rules
+      rules:
+      - alert: PodOOMKilled
+        expr: |
+          increase(kube_pod_container_status_terminated_reason{reason="OOMKilled"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Pod OOMKilled in {{ $labels.namespace }}/{{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} was OOMKilled in the last 5 minutes."
 global:
   rbac:
     create: true
