@@ -17,9 +17,9 @@ spec:
         k8s-app: hugo-gavriliu-com
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        # runAsUser: 1000
+        # runAsGroup: 1000
+        # fsGroup: 1000
         # allowPrivilegeEscalation: false
       serviceAccountName: hugo-gavriliu-com
       containers:
