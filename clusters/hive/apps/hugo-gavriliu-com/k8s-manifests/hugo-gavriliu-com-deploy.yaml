@@ -25,7 +25,7 @@ spec:
       containers:
         - image: ghcr.io/andreigavriliu/gavriliu.com:v1.0.0
           command: ["hugo"]
-          args: ["server", "--bind", "0.0.0.0"]
+          args: ["server", "--bind", "0.0.0.0", "--baseURL", "https://gavriliu.com", "--appendPort=false"]
           imagePullPolicy: Always
           name: hugo-gavriliu-com
           resources:
