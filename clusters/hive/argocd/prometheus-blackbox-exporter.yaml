@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus-blackbox-exporter
-    targetRevision: "9.8.0"
+    targetRevision: "10.1.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/prometheus-blackbox-exporter/helm/values.yaml
