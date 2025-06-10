@@ -23,7 +23,7 @@ spec:
         # allowPrivilegeEscalation: false
       serviceAccountName: hugo-gavriliu-com
       containers:
-        - image: ghcr.io/andreigavriliu/gavriliu.com:v1.0.3
+        - image: ghcr.io/andreigavriliu/gavriliu.com:v1.0.4
           command: ["hugo"]
           args: ["server", "--bind", "0.0.0.0", "--baseURL", "https://gavriliu.com", "--appendPort=false", "--environment", "production"]
           imagePullPolicy: Always
