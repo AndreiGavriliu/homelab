@@ -24,7 +24,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: filebrowser
-          image: filebrowser/filebrowser:v2.33.0
+          image: filebrowser/filebrowser:v2.33.4
           imagePullPolicy: Always
           ports:
             - containerPort: 80
