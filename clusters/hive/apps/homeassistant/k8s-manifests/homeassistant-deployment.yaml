@@ -19,7 +19,7 @@ spec:
       serviceAccount: homeassistant
       hostNetwork: true
       containers:
-        - image: ghcr.io/home-assistant/home-assistant:2025.6.1
+        - image: ghcr.io/home-assistant/home-assistant:2025.6.2
           imagePullPolicy: Always
           name: homeassistant
           resources:
