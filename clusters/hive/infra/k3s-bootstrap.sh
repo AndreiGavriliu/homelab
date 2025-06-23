@@ -17,7 +17,7 @@ k3sup install \
   --ip $MASTER_01 \
   --ssh-key /Users/gavu/Personal/Andrei\ Gavriliu/certificates/id_rsa_nopass \
   --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage' \
-  # --k3s-version v1.29.6+k3s2
+  --k3s-version v1.33.1+k3s1
 
 # The second node joins
 k3sup join \
@@ -28,7 +28,7 @@ k3sup join \
   --server-ip $MASTER_01 \
   --ssh-key /Users/gavu/Personal/Andrei\ Gavriliu/certificates/id_rsa_nopass \
   --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage' \
-  # --k3s-version v1.29.6+k3s2
+  --k3s-version v1.33.1+k3s1
 
 # The third node joins
 k3sup join \
@@ -39,7 +39,7 @@ k3sup join \
   --server-ip $MASTER_01 \
   --ssh-key /Users/gavu/Personal/Andrei\ Gavriliu/certificates/id_rsa_nopass \
   --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage' \
-  # --k3s-version v1.29.6+k3s2
+  --k3s-version v1.33.1+k3s1
 
 k3sup join \
   --ip $WORKER_01 \
@@ -47,4 +47,4 @@ k3sup join \
   --server-user $USER \
   --server-ip $MASTER_01 \
   --ssh-key /Users/gavu/Personal/Andrei\ Gavriliu/certificates/id_rsa_nopass \
-  # --k3s-version v1.29.6+k3s2
+  --k3s-version v1.33.1+k3s1
