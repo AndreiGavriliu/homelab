@@ -13,6 +13,8 @@ spec:
   selector:
     matchLabels:
       app: addon-filebrowser
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
