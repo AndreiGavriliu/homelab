@@ -5,6 +5,14 @@ common:
     smartctl_location: /usr/sbin/smartctl
     collect_not_more_than_period: 120s
 
+serviceMonitor:
+  enabled: true
+  extraLabels: {}
+  interval: 60s
+  scrapeTimeout: 30s
+  relabelings: []
+  metricRelabelings: []
+
 prometheusRules:
   enabled: true
   extraLabels: {}
