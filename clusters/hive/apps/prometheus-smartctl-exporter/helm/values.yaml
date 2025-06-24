@@ -1,3 +1,7 @@
+config:
+ devices:
+ - /dev/sda
+
 common:
   config:
     bind_to: "0.0.0.0:9633"
