@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: linkwarden
+  name: linkwarden
+  namespace: linkwarden
+spec:
+  ports:
+    - name: linkwarden
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: linkwarden
+  sessionAffinity: None
+  type: ClusterIP
