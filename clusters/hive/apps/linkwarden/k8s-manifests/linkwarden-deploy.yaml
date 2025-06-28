@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: linkwarden
+  name: linkwarden
+  namespace: linkwarden
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: linkwarden
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: linkwarden
+    spec:
+      serviceAccountName: linkwarden
+      # securityContext:
+      #   runAsNonRoot: true
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+      containers:
+        - image: ghcr.io/linkwarden/linkwarden
+          name: linkwarden
+          env:
+            - name: NEXTAUTH_URL
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden
+                  key: NEXTAUTH_URL
+            - name: NEXTAUTH_SECRET 
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden
+                  key: NEXTAUTH_SECRET
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden
+                  key: DATABASE_URL
+          volumeMounts:
+            - mountPath: /data/data
+              name: linkwarden
+      restartPolicy: Always
+      volumes:
+        - name: linkwarden
+          persistentVolumeClaim:
+            claimName: linkwarden
