@@ -26,7 +26,7 @@ spec:
             limits:
               cpu: 50m
               memory: 50Mi
-          image: redis:8.0.2
+          image: redis:8.0.3
           name: redis
           volumeMounts:
             - mountPath: /data
