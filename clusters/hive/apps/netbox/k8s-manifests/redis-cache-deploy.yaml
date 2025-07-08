@@ -34,6 +34,6 @@ spec:
               memory: 100Mi
             limits:
               memory: 100Mi
-          image: redis:8.0.2-alpine
+          image: redis:8.0.3-alpine
           name: redis-cache
       restartPolicy: Always
