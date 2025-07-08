@@ -52,8 +52,8 @@ spec:
             failureThreshold: 30
             periodSeconds: 10
           volumeMounts:
-            - mountPath: /.filebrowser.json
-              subPath: filebrowser.json
+            - mountPath: /config/settings.json
+              subPath: settings.json
               name: addon-filebrowser-configmap
             - mountPath: /srv
               name: addon-filebrowser-srv
