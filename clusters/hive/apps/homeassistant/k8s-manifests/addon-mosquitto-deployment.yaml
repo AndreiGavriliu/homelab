@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: mosquitto
-          image: eclipse-mosquitto:2.0.21
+          image: eclipse-mosquitto:2.0.22
           imagePullPolicy: Always
           resources:
             requests:
