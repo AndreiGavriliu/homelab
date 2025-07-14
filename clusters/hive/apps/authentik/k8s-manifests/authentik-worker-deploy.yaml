@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-worker
+  labels:
+    app: authentik-worker
+  namespace: authentik
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: authentik-worker
+  template:
+    metadata:
+      labels:
+        app: authentik-worker
+    spec:
+      serviceAccountName: authentik-worker
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: ghcr.io/goauthentik/server:2025.6.3
+          command: ["ak"]
+          args: ["worker"]
+          imagePullPolicy: Always
+          name: authentik-worker
+          # resources:
+          #   requests:
+          #     cpu: 600m
+          #     memory: 3300Mi
+          #   limits:
+          #     memory: 3300Mi
+          env:
+            - name: AUTHENTIK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_SECRET_KEY
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_POSTGRESQL__PASSWORD
+            - name: AUTHENTIK_REDIS__HOST
+              value: "redis"
+            - name: AUTHENTIK_POSTGRESQL__HOST
+              value: "postgres"
+            - name: AUTHENTIK_POSTGRESQL__USER
+              value: "authentik"
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              value: "authentik"
+          volumeMounts:
+            - mountPath: /media
+              name: authentik-media
+            - mountPath: /templates
+              name: authentik-templates
+            - mountPath: /certs
+              name: authentik-certs
+      volumes:
+        - name: authentik-media
+          persistentVolumeClaim:
+            claimName: authentik-media
+        - name: authentik-templates
+          persistentVolumeClaim:
+            claimName: authentik-templates
+        - name: authentik-certs
+          persistentVolumeClaim:
+            claimName: authentik-certs

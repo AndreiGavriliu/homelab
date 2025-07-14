@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: redis
+  labels:
+    app: redis
+  namespace: authentik
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: redis
