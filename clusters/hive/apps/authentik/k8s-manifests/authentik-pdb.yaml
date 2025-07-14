@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: authentik
+  labels:
+    app: authentik
+  namespace: authentik
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: authentik
