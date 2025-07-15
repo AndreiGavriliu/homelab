@@ -71,6 +71,13 @@ spec:
               value: "1000"
             - name: PAPERLESS_OCR_USER_ARGS
               value: "{'invalidate_digital_signatures': true}"
+            - name: PAPERLESS_APPS
+              value: "allauth.socialaccount.providers.openid_connect"
+            - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx
+                  key: PAPERLESS_SOCIALACCOUNT_PROVIDERS
           volumeMounts:
             - mountPath: /usr/src/paperless/data
               name: paperless-ngx-data
