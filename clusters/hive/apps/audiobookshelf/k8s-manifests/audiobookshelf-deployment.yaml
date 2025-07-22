@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: ghcr.io/advplyr/audiobookshelf:2.26.1
+        - image: ghcr.io/advplyr/audiobookshelf:2.26.2
           imagePullPolicy: Always
           name: audiobookshelf
           volumeMounts:
