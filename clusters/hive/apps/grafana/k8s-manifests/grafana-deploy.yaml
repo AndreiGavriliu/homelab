@@ -22,21 +22,21 @@ spec:
           name: grafana
           env:
             - name: GF_AUTH_GENERIC_OAUTH_ENABLED
-              value: "false"
+              value: "true"
             - name: GF_AUTH_GENERIC_OAUTH_NAME
               value: "SSO"
             - name: GF_AUTH_GENERIC_OAUTH_CLIENT_ID
-              value: "grafana"
+              value: "YyUH2QICEMoZ6pFCGbrPLL1a8u1MUhF9pJUZcSDP"
             - name: GF_AUTH_GENERIC_OAUTH_SCOPES
-              value: "openid email profile offline_access roles"
+              value: "openid email profile"
             - name: GF_AUTH_GENERIC_OAUTH_AUTH_URL
-              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/auth"
+              value: "https://auth.gavriliu.com/application/o/authorize/"
             - name: GF_AUTH_GENERIC_OAUTH_TOKEN_URL
-              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/token"
+              value: "https://auth.gavriliu.com/application/o/token/"
             - name: GF_AUTH_GENERIC_OAUTH_API_URL
-              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/userinfo"
+              value: "https://auth.gavriliu.com/application/o/userinfo/"
             - name: GF_AUTH_SIGNOUT_REDIRECT_URL
-              value: "https://sso.gavriliu.com/realms/gavriliu.com/protocol/openid-connect/logout?post_logout_redirect_uri=https%3A%2F%2Fgrafana.gavriliu.com%2Flogin&client_id=grafana"
+              value: "https://auth.gavriliu.com/application/o/<application_slug>/end-session/"
             - name: GF_SERVER_ROOT_URL
               value: "https://grafana.gavriliu.com"
             - name: GF_AUTH_OAUTH_AUTO_LOGIN
@@ -44,7 +44,9 @@ spec:
             - name: GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP
               value: "true"
             - name: GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH
-              value: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+              value: "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'"
+            - name: GF_SERVER_ROOT_URL
+              value: "https://grafana.gavriliu.com"
             - name: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
