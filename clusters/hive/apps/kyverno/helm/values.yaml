@@ -1,8 +1,8 @@
 admissionController:
   replicas: 1
-backgroundController
+backgroundController:
   replicas: 1
-cleanupController
+cleanupController:
   replicas: 1
-reportsController
+reportsController:
   replicas: 1
