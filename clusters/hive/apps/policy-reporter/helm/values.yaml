@@ -1,0 +1,17 @@
+ui:
+  enabled: true
+  ingress:
+    enabled: true
+    className: traefik
+    labels: {}
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+    hosts:
+      - host: policy-reporter.hive.gavriliu.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+  
+plugin:
+  kyverno:
+    enabled: true
