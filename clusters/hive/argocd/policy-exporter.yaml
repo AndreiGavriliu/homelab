@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: policy-reporter
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: policy-reporter
+  project: default
+  sources:
+  - repoURL: https://kyverno.github.io/policy-reporter
+    chart: policy-reporter
+    targetRevision: "3.3.1"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/policy-reporter/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
