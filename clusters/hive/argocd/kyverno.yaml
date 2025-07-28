@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kyverno
+  project: default
+  sources:
+  - repoURL: https://kyverno.github.io/kyverno/
+    chart: kyverno
+    targetRevision: "3.4.4"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/kyverno/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
