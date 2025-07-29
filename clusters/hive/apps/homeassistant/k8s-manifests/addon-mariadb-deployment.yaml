@@ -21,7 +21,6 @@ spec:
         runAsNonRoot: true
         runAsUser: 1001
         runAsGroup: 1001  # Changed from 1000 to 1001
-        fsGroup: 1001     # Added fsGroup for volume permissions
       containers:
         - image: bitnami/mariadb:11.8.2
           imagePullPolicy: Always
