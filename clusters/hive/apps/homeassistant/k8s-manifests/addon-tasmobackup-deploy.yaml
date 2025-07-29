@@ -21,9 +21,9 @@ spec:
         - image: danmed/tasmobackupv1:1.06.09
           imagePullPolicy: Always
           name: tasmobackup
-          securityContext:
-            runAsNonRoot: true
-            runAsGroup: 1000
+          # securityContext:
+          #   runAsNonRoot: true
+          #   runAsGroup: 1000
           resources:
             requests:
               cpu: 50m
