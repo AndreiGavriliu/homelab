@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: addon-filebrowser-allow-same-namespace
+  namespace: homeassistant
+spec:
+  podSelector:
+    matchLabels:
+      app: addon-filebrowser
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector: {} 
