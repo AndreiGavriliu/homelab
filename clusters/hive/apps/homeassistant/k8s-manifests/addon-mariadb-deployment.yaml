@@ -19,7 +19,7 @@ spec:
       serviceAccountName: addon-mariadb
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
+        runAsUser: 1001
         runAsGroup: 1000
       containers:
         - image: bitnami/mariadb:11.8.2
