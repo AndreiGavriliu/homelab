@@ -18,6 +18,7 @@ spec:
     spec:
       serviceAccount: homeassistant
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - image: ghcr.io/home-assistant/home-assistant:2025.7.4
           imagePullPolicy: Always
