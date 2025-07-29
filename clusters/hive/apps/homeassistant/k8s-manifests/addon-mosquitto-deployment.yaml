@@ -46,17 +46,17 @@ spec:
               name: tcp-8883
               protocol: TCP
           volumeMounts:
-            - name: localtime
-              mountPath: /etc/localtime
+            # - name: localtime
+            #   mountPath: /etc/localtime
             - name: addon-mosquitto
               mountPath: /mosquitto
       volumes:
-        - name: secrets-volume
-          emptyDir: {}
-        - name: localtime
-          hostPath:
-            path: /etc/localtime
-            type: ""
+        # - name: secrets-volume
+        #   emptyDir: {}
+        # - name: localtime
+        #   hostPath:
+        #     path: /etc/localtime
+        #     type: ""
         - name: addon-mosquitto
           persistentVolumeClaim:
             claimName: addon-mosquitto
