@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-ingress-from-traefik
+  name: addon-vscode-allow-from-traefik
   namespace: homeassistant
 spec:
   podSelector:
     matchLabels:
-      k8s-app: addon-tasmobackup
+      app: addon-vscode
   policyTypes:
     - Ingress
   ingress:
