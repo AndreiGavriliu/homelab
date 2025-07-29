@@ -53,7 +53,7 @@ spec:
                   name: addon-mariadb
                   key: MYSQL_PASSWORD
           volumeMounts:
-            - mountPath: /bitnami/mariadb
+            - mountPath: /config
               name: mariadb
       volumes:
         - name: mariadb
