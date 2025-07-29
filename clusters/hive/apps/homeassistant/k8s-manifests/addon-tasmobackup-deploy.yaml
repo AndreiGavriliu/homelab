@@ -21,12 +21,14 @@ spec:
         - image: danmed/tasmobackupv1:1.06.09
           imagePullPolicy: Always
           name: tasmobackup
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
           resources:
             requests:
               cpu: 50m
               memory: 150Mi
             limits:
-              # cpu: 200m
               memory: 150Mi
           env:
             - name: DBTYPE
