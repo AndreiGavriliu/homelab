@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: addon-zigbee2mqtt-allow-same-namespace
+  namespace: homeassistant
+spec:
+  podSelector:
+    matchLabels:
+      app: addon-zigbee2mqtt
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector: {} 

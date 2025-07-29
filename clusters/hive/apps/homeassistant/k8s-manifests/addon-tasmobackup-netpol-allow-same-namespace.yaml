@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: addon-tasmobackup-allow-same-namespace
+  namespace: homeassistant
+spec:
+  podSelector:
+    matchLabels:
+      k8s-app: addon-tasmobackup
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector: {} 
