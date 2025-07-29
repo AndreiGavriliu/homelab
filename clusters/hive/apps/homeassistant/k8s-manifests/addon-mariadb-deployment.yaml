@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: lscr.io/linuxserver/mariadb:11.8.2
+        - image: lscr.io/linuxserver/mariadb:11.4.5
           imagePullPolicy: Always
           name: mariadb
           resources:
