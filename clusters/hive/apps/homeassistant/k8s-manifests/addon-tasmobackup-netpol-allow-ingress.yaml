@@ -16,4 +16,4 @@ spec:
               kubernetes.io/metadata.name: traefik
           podSelector:
             matchLabels:
-              k8s-app: addon-tasmobackup
+              app: traefik
