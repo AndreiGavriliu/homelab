@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://charts.netbox.oss.netboxlabs.com/
     chart: netbox
-    targetRevision: "6.0.59"
+    targetRevision: "6.0.60"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/netbox/helm/values.yaml
