@@ -1,14 +1,13 @@
-# plugins: ['netbox_kubernetes']
-
-# pluginsConfig: {
-#     'netbox_kubernetes': {
-#         'allow_cluster_deletion': False,
-#     }
-# }
-
 powerFeedDefaultVoltage: 230
 
 preferIPv4: true
+
+postgresql:
+  enabled: true
+  auth:
+    username: netbox
+    database: netbox
+    existingSecret: postgresql
 
 persistence:
   enabled: true
