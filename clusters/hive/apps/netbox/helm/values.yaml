@@ -1,0 +1,44 @@
+plugins: []
+
+pluginsConfig: {}
+
+powerFeedDefaultVoltage: 230
+
+preferIPv4: true
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  subPath: ""
+  accessMode: ReadWriteMany
+  size: 1Gi
+  existingClaim: ""
+  annotations: {}
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 750m
+    memory: 2Gi
+
+worker:
+  enabled: false
+
+valkey:
+  enabled: true
+  architecture: standalone
+  replica:
+    replicaCount: 0
+
+ingress:
+  enabled: true
+  pathType: ImplementationSpecific
+  className: traefik
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+  hosts:
+    - host: netbox.gavriliu.com
+      paths:
+        - /
