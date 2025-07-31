@@ -1,7 +1,8 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: addon-influxdb-allow-homeassistant-and-grafana
+  name: addon-influxdb-allow-same-namespace
   namespace: homeassistant
 spec:
   podSelector:
@@ -11,7 +12,26 @@ spec:
     - Ingress
   ingress:
     - from:
-        - podSelector: {}
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: homeassistant
+      ports:
+        - protocol: TCP
+          port: 8086
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: addon-influxdb-allow-from-grafana
+  namespace: homeassistant
+spec:
+  podSelector:
+    matchLabels:
+      app: addon-influxdb
+  policyTypes:
+    - Ingress
+  ingress:
     - from:
         - namespaceSelector:
             matchLabels:
