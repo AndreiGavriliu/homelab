@@ -1,6 +1,10 @@
-plugins: []
+plugins: ['netbox_kubernetes']
 
-pluginsConfig: {}
+pluginsConfig: {
+    'netbox_kubernetes': {
+        'allow_cluster_deletion': False,
+    }
+}
 
 powerFeedDefaultVoltage: 230
 
