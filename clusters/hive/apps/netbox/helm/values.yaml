@@ -1,3 +1,5 @@
+plugins: []
+
 powerFeedDefaultVoltage: 230
 
 preferIPv4: true
