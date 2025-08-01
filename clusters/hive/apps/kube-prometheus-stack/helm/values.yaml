@@ -306,7 +306,7 @@ prometheus:
           accessModes: ["ReadWriteMany"]
           resources:
             requests:
-              storage: 50Gi
+              storage: 60Gi
     additionalScrapeConfigs:
     - job_name: k10
       scrape_interval: 15s
