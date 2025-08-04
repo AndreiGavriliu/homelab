@@ -1,8 +1,8 @@
-plugins: ['netbox_topology_views']
+# plugins: ['netbox_topology_views']
 
-pluginsConfig: {
-  'netbox_topology_views': {}
-}
+# pluginsConfig: {
+#   'netbox_topology_views': {}
+# }
 
 netbox:
   command:
