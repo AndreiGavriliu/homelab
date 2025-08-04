@@ -4,23 +4,23 @@
 #   'netbox_topology_views': {}
 # }
 
-netbox:
-  command:
-    - /usr/bin/tini
-    - --
-    - /bin/sh
-    - -c
-    - |
-      echo "Installing NetBox plugins..."
-      /opt/netbox/venv/bin/pip install --no-cache-dir netbox-dns netbox-topology-views
+# netbox:
+#   command:
+#     - /usr/bin/tini
+#     - --
+#     - /bin/sh
+#     - -c
+#     - |
+#       echo "Installing NetBox plugins..."
+#       /opt/netbox/venv/bin/pip install --no-cache-dir netbox-dns netbox-topology-views
       
-      echo "Running migrations for plugins..."
-      cd /opt/netbox/netbox
-      /opt/netbox/venv/bin/python manage.py migrate
-      /opt/netbox/venv/bin/python manage.py collectstatic --no-input
+#       echo "Running migrations for plugins..."
+#       cd /opt/netbox/netbox
+#       /opt/netbox/venv/bin/python manage.py migrate
+#       /opt/netbox/venv/bin/python manage.py collectstatic --no-input
       
-      echo "Starting NetBox with Unit..."
-      exec /opt/netbox/docker-entrypoint.sh /opt/netbox/launch-netbox.sh
+#       echo "Starting NetBox with Unit..."
+#       exec /opt/netbox/docker-entrypoint.sh /opt/netbox/launch-netbox.sh
 
 powerFeedDefaultVoltage: 230
 
