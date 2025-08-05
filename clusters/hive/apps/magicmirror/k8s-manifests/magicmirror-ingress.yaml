@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: magicmirror
+  namespace: magicmirror
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-redirect@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: magicmirror.gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: magicmirror
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

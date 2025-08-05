@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vscode
+  labels:
+    app: vscode
+  namespace: magicmirror
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: vscode
+  template:
+    metadata:
+      labels:
+        app: vscode
+    spec:
+      serviceAccountName: vscode
+      containers:
+        - image: lscr.io/linuxserver/code-server:4.91.1
+          imagePullPolicy: Always
+          name: vscode
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
+            - name: DEFAULT_WORKSPACE
+              value: /workspace
+          # resources:
+          #   requests:
+          #     cpu: 250m
+          #     memory: 250Mi
+          #   limits:
+          #     cpu: 500m
+          #     memory: 500Mi
+          volumeMounts:
+            - name: vscode
+              mountPath: /config
+            - name: modules
+              mountPath: /workspace/modules
+            - name: config
+              mountPath: /workspace/config
+            - name: css
+              mountPath: /workspace/css
+      volumes:
+        - name: vscode
+          persistentVolumeClaim:
+            claimName: vscode
+        - name: modules
+          persistentVolumeClaim:
+            claimName: modules
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: css
+          persistentVolumeClaim:
+            claimName: css

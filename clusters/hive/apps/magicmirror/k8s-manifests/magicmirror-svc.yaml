@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: magicmirror
+  name: magicmirror
+  namespace: magicmirror
+spec:
+  ports:
+    - name: magicmirror
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    k8s-app: magicmirror
+  sessionAffinity: None
+  type: ClusterIP
