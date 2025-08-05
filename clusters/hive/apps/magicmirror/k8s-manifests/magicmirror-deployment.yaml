@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magicmirror
+  labels:
+    k8s-app: magicmirror
+  namespace: magicmirror
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: magicmirror
+  template:
+    metadata:
+      labels:
+        k8s-app: magicmirror
+    spec:
+      containers:
+        - image: karsten13/magicmirror:v2.28.0
+          imagePullPolicy: Always
+          name: magicmirror
+          resources:
+            requests:
+              cpu: 50m
+              memory: 400Mi
+            limits:
+              cpu: 50m
+              memory: 400Mi
+          command: ["npm"]
+          args: ["run", "server"]
+          volumeMounts:
+            - mountPath: /opt/magic_mirror/config
+              name: config
+            - mountPath: /opt/magic_mirror/modules
+              name: modules
+            - mountPath: /opt/magic_mirror/css
+              name: css
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: modules
+          persistentVolumeClaim:
+            claimName: modules
+        - name: css
+          persistentVolumeClaim:
+            claimName: css

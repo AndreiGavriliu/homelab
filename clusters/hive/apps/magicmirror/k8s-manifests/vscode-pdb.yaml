@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: vscode
+  labels:
+    app: vscode
+  namespace: magicmirror
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: vscode
