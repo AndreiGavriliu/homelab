@@ -38,9 +38,19 @@ renovate:
         "fileMatch": ["^clusters/hive/argocd/.*\\.ya?ml$"]
       },
       "dependencyDashboard": true,
+      "dependencyDashboardTitle": "Homelab Dependency Dashboard",
+      "dependencyDashboardAutoclose": true,
       "additionalBranchPrefix": "{{baseDir}}-",
+      "branchPrefix": "renovate/",
+      "semanticCommits": "enabled",
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "to {{newVersion}}",
+      "prTitle": "Update {{depName}} {{#if isMajor}}(major){{else}}{{#if isMinor}}(minor){{else}}(patch){{/if}}{{/if}}",
+      "platformAutomerge": false,
+      "gitNoVerify": ["commit", "push"],
       "regexManagers": [
         {
+          "description": "K3s version updates in system upgrade plans",
           "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/plans/.*\\.ya?ml$"],
           "matchStrings": [
             "version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
@@ -53,67 +63,103 @@ renovate:
       ],
       "packageRules": [
         {
+          "description": "Exclude old calibre-web 2021 versions",
           "matchPackageNames": ["lscr.io/linuxserver/calibre-web"],
           "allowedVersions": "!/^2021/"
         },
         {
+          "description": "Keep calibre-web on v1.x",
           "matchPackageNames": ["lscr.io/linuxserver/calibre-web"],
           "allowedVersions": "<2"
         },
         {
+          "description": "Keep influxdb on v1.x",
           "matchPackageNames": ["influxdb"],
           "allowedVersions": "<2.0.0"
         },
         {
+          "description": "Keep opensearch on v2.x",
           "matchPackageNames": ["opensearchproject/opensearch"],
           "allowedVersions": "<3.0.0"
         },
         {
+          "description": "Custom versioning for fireflyiii/core",
           "matchDatasources": ["docker"],
           "matchPackageNames": ["fireflyiii/core"],
           "versioning": "regex:^version-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
         },
         {
+          "description": "Custom versioning for fireflyiii/data-importer",
           "matchDatasources": ["docker"],
           "matchPackageNames": ["fireflyiii/data-importer"],
           "versioning": "regex:^version-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
         },
         {
+          "description": "Custom versioning for umami",
           "matchDatasources": ["docker"],
           "matchPackageNames": ["ghcr.io/umami-software/umami"],
           "versioning": "regex:^postgresql-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
         },
         {
+          "description": "Group minor/patch helm updates",
           "matchManagers": ["helm-values"],
           "matchPaths": ["^clusters/hive/apps/[^/]+/helm/values\\.ya?ml$"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["helm update", "minor or patch"]
+          "labels": ["helm update", "minor or patch"],
+          "groupName": "helm non-major updates",
         },
         {
+          "description": "Individual major helm updates",
           "matchManagers": ["helm-values"],
           "matchPaths": ["^clusters/hive/apps/[^/]+/helm/values\\.ya?ml$"],
           "updateTypes": ["major"],
           "labels": ["helm update", "major"]
         },
         {
+          "description": "Group minor/patch kubernetes updates",
           "matchManagers": ["kubernetes"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["kubernetes update", "minor or patch"]
+          "labels": ["kubernetes update", "minor or patch"],
+          "groupName": "kubernetes non-major updates",
         },
         {
+          "description": "Individual major kubernetes updates",
           "matchManagers": ["kubernetes"],
           "updateTypes": ["major"],
           "labels": ["kubernetes update", "major"]
         },
         {
+          "description": "Group minor/patch argocd updates",
           "matchManagers": ["argocd"],
           "updateTypes": ["minor", "patch"],
-          "labels": ["argocd update", "minor or patch"]
+          "labels": ["argocd update", "minor or patch"],
+          "groupName": "argocd non-major updates",
         },
         {
+          "description": "Individual major argocd updates",
           "matchManagers": ["argocd"],
           "updateTypes": ["major"],
           "labels": ["argocd update", "major"]
+        },
+        {
+          "description": "Docker digest updates - low priority",
+          "matchDatasources": ["docker"],
+          "matchUpdateTypes": ["digest"],
+          "labels": ["docker", "digest"],
+          "groupName": "docker digest updates",
+          "prPriority": -5
+        }
+      ],
+      "hostRules": [
+        {
+          "description": "Increase timeout for slow registries",
+          "matchHost": "docker.io",
+          "timeout": 120000
+        },
+        {
+          "description": "Increase timeout for GitHub releases",
+          "matchHost": "github.com",
+          "timeout": 60000
         }
       ]
     }
