@@ -19,8 +19,8 @@ spec:
       serviceAccountName: umami
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
+        runAsUser: 1001
+        runAsGroup: 1001
       containers:
         - image: ghcr.io/umami-software/umami:postgresql-v2.17.0
           imagePullPolicy: Always
