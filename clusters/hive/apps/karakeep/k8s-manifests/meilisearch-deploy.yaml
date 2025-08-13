@@ -16,6 +16,12 @@ spec:
       containers:
         - name: meilisearch
           image: getmeili/meilisearch:v1.17.1
+          command:
+            - tini
+            - -- 
+            - /bin/sh
+            - -c
+            - /bin/meilisearch --experimental-dumpless-upgrade
           resources:
             requests:
               cpu: 100m
