@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://fluent.github.io/helm-charts
     chart: fluent-bit
-    targetRevision: "0.51.0"
+    targetRevision: "0.52.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/fluent-bit/helm/values.yaml
