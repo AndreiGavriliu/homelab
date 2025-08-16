@@ -41,7 +41,7 @@ spec:
               memory: 200Mi
             limits:
               memory: 200Mi
-          image: postgres:17.5
+          image: postgres:17.6
           name: postgres
           volumeMounts:
             - mountPath: /var/lib/postgresql/data/
