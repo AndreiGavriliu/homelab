@@ -28,6 +28,9 @@ renovate:
       "ignorePaths": [
         "archive/"
       ],
+      "prHourlyLimit": 10,
+      "prConcurrentLimit": 20,
+      "branchConcurrentLimit": 0,
       "kubernetes": {
         "fileMatch": ["^clusters/hive/apps/[^/]+/k8s-manifests/.*\\.ya?ml$"]
       },
