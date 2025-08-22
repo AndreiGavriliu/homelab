@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: alertmanager-to-github
-        image: ghcr.io/pfnet-research/alertmanager-to-github:v0.2.2
+        image: ghcr.io/pfnet-research/alertmanager-to-github:v0.2.3
         env:
         - name: ATG_LISTEN
           value: ':8080'
