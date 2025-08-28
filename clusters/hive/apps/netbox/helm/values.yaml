@@ -69,3 +69,7 @@ ingress:
     - host: netbox.gavriliu.com
       paths:
         - /
+
+housekeeping:
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
