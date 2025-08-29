@@ -22,7 +22,7 @@ spec:
               cpu: 100m
               memory: 500Mi
             limits:
-              memory: 700Mi
+              memory: 1Gi
           ports:
             - containerPort: 3000
           env:
