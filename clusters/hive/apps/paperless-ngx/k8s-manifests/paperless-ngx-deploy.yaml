@@ -71,6 +71,10 @@ spec:
               value: "1000"
             - name: PAPERLESS_OCR_USER_ARGS
               value: "{'invalidate_digital_signatures': true}"
+            - name: PAPERLESS_DISABLE_REGULAR_LOGIN
+              value: "true"
+            - name: PAPERLESS_REDIRECT_LOGIN_TO_SSO
+              value: "true"
             - name: PAPERLESS_APPS
               value: "allauth.socialaccount.providers.openid_connect"
             - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
