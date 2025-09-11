@@ -308,7 +308,7 @@ prometheus:
             requests:
               storage: 60Gi
     additionalScrapeConfigs:
-    - job_name: 'pihole'
+    - job_name: 'node-exporter'
       static_configs:
         - targets: ['10.0.0.5:9100']
     - job_name: k10
