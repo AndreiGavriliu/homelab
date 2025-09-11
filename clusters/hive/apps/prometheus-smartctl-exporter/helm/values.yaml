@@ -1,6 +1,7 @@
 config:
  devices:
  - /dev/sda
+ - /dev/sdb
 
 common:
   config:
