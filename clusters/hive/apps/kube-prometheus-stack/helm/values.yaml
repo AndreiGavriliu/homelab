@@ -310,7 +310,7 @@ prometheus:
     additionalScrapeConfigs:
     - job_name: 'node-exporter'
       static_configs:
-        - targets: ['10.0.0.5:9100', '10.0.0.30:9100']
+        - targets: ['10.0.0.5:9100', '10.0.0.30:9100', '10.0.0.101:9100']
     - job_name: k10
       scrape_interval: 15s
       honor_labels: true
