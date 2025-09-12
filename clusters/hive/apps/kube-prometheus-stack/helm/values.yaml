@@ -20,6 +20,15 @@ alertmanager:
       - name: "alertmanager-to-github"
         webhook_configs:
           - url: "http://alertmanager-to-github.alertmanager-to-github.svc.cluster.local/v1/webhook?owner=AndreiGavriliu&repo=homelab"
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes: ["ReadWriteMany"]
+          resources:
+            requests:
+              storage: 3Gi
 
 defaultRules:
   create: true
