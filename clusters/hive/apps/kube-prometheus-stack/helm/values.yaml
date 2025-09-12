@@ -310,7 +310,15 @@ prometheus:
     additionalScrapeConfigs:
     - job_name: 'node-exporter'
       static_configs:
-        - targets: ['10.0.0.5:9100', '10.0.0.30:9100', '10.0.0.101:9100']
+        - targets: ['10.0.0.5:9100']
+          labels:
+            hostname: pihole.lab.gavriliu.com
+        - targets: ['10.0.0.30:9100']
+          labels:
+            hostname: loadbalancer.lab.gavriliu.com
+        - targets: ['10.0.0.101:9100']
+          labels:
+            hostname: raspberrymatic.lab.gavriliu.com
     - job_name: k10
       scrape_interval: 15s
       honor_labels: true
