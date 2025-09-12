@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-pihole-exporter
+  labels:
+    app: prometheus-pihole-exporter
+  namespace: kube-prometheus-stack
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: prometheus-pihole-exporter
+  template:
+    metadata:
+      labels:
+        app: prometheus-pihole-exporter
+    spec:
+      serviceAccountName: prometheus-pihole-exporter
+      containers:
+        - image: ekofr/pihole-exporter:v1.2.0
+          imagePullPolicy: Always
+          name: prometheus-pihole-exporter
+          env:
+          - name: PIHOLE_PROTOCOL
+            value: "http"
+          - name: PIHOLE_HOSTNAME
+            value: "10.0.0.5"
+          - name: PIHOLE_PORT
+            value: "80"
+          - name: PORT
+            value: "9100"
+          - name: PIHOLE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: prometheus-pihole-exporter
+                key: PIHOLE_PASSWORD

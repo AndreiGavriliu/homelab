@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: prometheus-pihole-exporter
+  labels:
+    app: prometheus-pihole-exporter
+  namespace: kube-prometheus-stack
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: prometheus-pihole-exporter
