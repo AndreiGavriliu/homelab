@@ -319,6 +319,12 @@ prometheus:
         - targets: ['10.0.0.101:9100']
           labels:
             hostname: raspberrymatic.lab.gavriliu.com
+      relabel_configs:
+        - source_labels: [hostname]
+          target_label: __address__
+          # replacement: '${1}:9100'   # optional if you want to keep scraping by IP, usually leave __address__ as is
+        - source_labels: [hostname]
+          target_label: instance
     - job_name: k10
       scrape_interval: 15s
       honor_labels: true
