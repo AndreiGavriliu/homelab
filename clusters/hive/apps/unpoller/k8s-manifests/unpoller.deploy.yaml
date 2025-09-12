@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unpoller
+  labels:
+    app: unpoller
+  namespace: unpoller
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: unpoller
+  template:
+    metadata:
+      labels:
+        app: unpoller
+    spec:
+      containers:
+        - image: ghcr.io/unpoller/unpoller:v2.15.4
+          imagePullPolicy: Always
+          name: unpoller
+          env:
+            - name: UP_UNIFI_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: unpoller
+                  key: UP_UNIFI_DEFAULT_USER
+            - name: UP_UNIFI_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: unpoller
+                  key: UP_UNIFI_DEFAULT_PASS
+          volumeMounts:
+            - name: unpoller
+              mountPath: "/etc/unpoller/up.conf"
+              subPath: up.conf
+              readOnly: true
+      volumes:
+      - name: unpoller
+        secret:
+          secretName: unpoller
+          items:
+          - key: up.conf
+            path: up.conf
