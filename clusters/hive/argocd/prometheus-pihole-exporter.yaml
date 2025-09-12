@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-pihole-exporter
+  name: pihole-exporter
   namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus-pihole-exporter
+    namespace: kube-prometheus
   project: default
   source:
     path: clusters/hive/apps/prometheus-pihole-exporter/k8s-manifests
