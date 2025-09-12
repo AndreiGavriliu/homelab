@@ -310,7 +310,7 @@ prometheus:
     additionalScrapeConfigs:
     - job_name: "pi-hole"
       static_configs:
-          - targets: ["prometheus-pihole-exporter.svc:9100"]
+          - targets: ["prometheus-pihole-exporter.kube-prometheus-stack.svc:9100"]
     - job_name: 'node-exporter'
       static_configs:
         - targets: ['10.0.0.5:9100', '10.0.0.10:9100', '10.0.0.30:9100', '10.0.0.101:9100']
