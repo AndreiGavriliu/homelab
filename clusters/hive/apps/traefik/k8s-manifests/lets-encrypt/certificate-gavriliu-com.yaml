@@ -10,6 +10,7 @@ spec:
     - "*.gavriliu.com"
     - "*.hive.gavriliu.com"
     - "*.home.gavriliu.com"
+    - "*.int.gavriliu.com"
     - "dugulan.com"
     - "*.dugulan.com"
   issuerRef:
