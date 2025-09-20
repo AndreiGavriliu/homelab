@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://charts.kasten.io
     chart: k10
-    targetRevision: "8.0.8"
+    targetRevision: "8.0.9"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/kasten-io/helm/values.yaml
