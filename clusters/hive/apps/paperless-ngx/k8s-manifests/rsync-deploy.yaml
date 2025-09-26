@@ -23,7 +23,7 @@ spec:
         runAsGroup: 1000
       containers:
         - name: rsync
-          image: eeacms/rsync:2.9
+          image: eeacms/rsync:3.0
           imagePullPolicy: Always
           resources:
             requests:
