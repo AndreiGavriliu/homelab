@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: freshrss
       containers:
-        - image: freshrss/freshrss:1.27.0
+        - image: freshrss/freshrss:1.27.1
           imagePullPolicy: Always
           name: freshrss
           env:
