@@ -20,7 +20,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-        - image: ghcr.io/home-assistant/home-assistant:2025.10.0
+        - image: ghcr.io/home-assistant/home-assistant:2025.10.1
           imagePullPolicy: Always
           name: homeassistant
           resources:
