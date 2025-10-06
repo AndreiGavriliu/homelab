@@ -1,33 +1,11 @@
-# plugins: ['netbox_topology_views']
-
-# pluginsConfig: {
-#   'netbox_topology_views': {}
-# }
-
-# netbox:
-#   command:
-#     - /usr/bin/tini
-#     - --
-#     - /bin/sh
-#     - -c
-#     - |
-#       echo "Installing NetBox plugins..."
-#       /opt/netbox/venv/bin/pip install --no-cache-dir netbox-dns netbox-topology-views
-      
-#       echo "Running migrations for plugins..."
-#       cd /opt/netbox/netbox
-#       /opt/netbox/venv/bin/python manage.py migrate
-#       /opt/netbox/venv/bin/python manage.py collectstatic --no-input
-      
-#       echo "Starting NetBox with Unit..."
-#       exec /opt/netbox/docker-entrypoint.sh /opt/netbox/launch-netbox.sh
-
 powerFeedDefaultVoltage: 230
 
 preferIPv4: true
 
 postgresql:
   enabled: true
+  image:
+      repository: bitnamilegacy/postgresql
   auth:
     username: netbox
     database: netbox
@@ -55,6 +33,8 @@ worker:
 
 valkey:
   enabled: true
+  image:
+    repository: bitnamilegacy/valkey
   architecture: standalone
   replica:
     replicaCount: 0
