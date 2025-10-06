@@ -21,18 +21,10 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
       containers:
         - image: ghcr.io/paperless-ngx/paperless-ngx:2.18.4
           imagePullPolicy: Always
           name: paperless-ngx
-          resources:
-            requests:
-              cpu: 600m
-              memory: 3300Mi
-            limits:
-              memory: 3300Mi
           env:
             - name: PAPERLESS_ADMIN_USER
               value: "admin"
@@ -66,7 +58,7 @@ spec:
             - name: PAPERLESS_FILENAME_FORMAT
               value: "{{owner_username}}/{{document_type}}/{{correspondent}}/{{created_year}}-{{created_month}}-{{created_day}} - {{title}}"
             - name: PAPERLESS_DEBUG
-              value: "true"
+              value: "false"
             - name: USERMAP_UID
               value: "1000"
             - name: USERMAP_GID
