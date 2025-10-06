@@ -1,0 +1,6 @@
+rbac:
+  create: true
+
+operator-controller: {}
+
+operator-controller-containers: {}

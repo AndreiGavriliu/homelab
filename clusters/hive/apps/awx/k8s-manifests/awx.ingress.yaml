@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: awx
+  namespace: awx
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: awx.gavriliu.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: awx-service
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

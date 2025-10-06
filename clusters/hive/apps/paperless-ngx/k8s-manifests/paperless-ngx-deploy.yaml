@@ -21,6 +21,8 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
       containers:
         - image: ghcr.io/paperless-ngx/paperless-ngx:2.18.4
           imagePullPolicy: Always

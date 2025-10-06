@@ -1,0 +1,52 @@
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+spec:
+  admin_user: admin
+  auto_upgrade: true
+  create_preload_data: true
+  garbage_collect_secrets: false
+  image_pull_policy: IfNotPresent
+  ipv6_disabled: false
+  loadbalancer_class: ""
+  loadbalancer_ip: ""
+  loadbalancer_port: 80
+  loadbalancer_protocol: http
+  metrics_utility_console_enabled: false
+  metrics_utility_cronjob_gather_schedule: '@hourly'
+  metrics_utility_cronjob_report_schedule: '@monthly'
+  metrics_utility_enabled: false
+  metrics_utility_pvc_claim_size: 5Gi
+  no_log: true
+  postgres_data_volume_init: true
+  postgres_keepalives: true
+  postgres_keepalives_count: 5
+  postgres_keepalives_idle: 5
+  postgres_keepalives_interval: 5
+  projects_persistence: false
+  projects_storage_access_mode: ReadWriteMany
+  projects_storage_size: 8Gi
+  replicas: 1
+  route_tls_termination_mechanism: Edge
+  service_type: clusterip
+  set_self_labels: true
+  task_liveness_failure_threshold: 3
+  task_liveness_initial_delay: 5
+  task_liveness_period: 0
+  task_liveness_timeout: 1
+  task_manage_replicas: true
+  task_privileged: false
+  task_readiness_failure_threshold: 3
+  task_readiness_initial_delay: 20
+  task_readiness_period: 0
+  task_readiness_timeout: 1
+  web_liveness_failure_threshold: 3
+  web_liveness_initial_delay: 5
+  web_liveness_period: 0
+  web_liveness_timeout: 1
+  web_manage_replicas: true
+  web_readiness_failure_threshold: 3
+  web_readiness_initial_delay: 20
+  web_readiness_period: 0
+  web_readiness_timeout: 1
