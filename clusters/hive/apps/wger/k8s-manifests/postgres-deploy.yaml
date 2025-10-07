@@ -28,8 +28,8 @@ spec:
               value: wger
             - name: POSTGRES_USER
               value: wger
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
+            # - name: PGDATA
+            #   value: /var/lib/postgresql/data/pgdata
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -44,7 +44,8 @@ spec:
           image: postgres:18.0
           name: postgres
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data/
+            # - mountPath: /var/lib/postgresql/data/
+            - mountPath: /var/lib/postgresql
               name: postgres-data
       restartPolicy: Always
       volumes:
