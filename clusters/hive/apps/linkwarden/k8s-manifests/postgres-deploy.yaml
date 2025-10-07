@@ -37,8 +37,8 @@ spec:
               value: "linkwarden"
             - name: POSTGRES_USER
               value: "linkwarden"
-            - name: PGDATA
-              value: "/var/lib/postgresql/data/pgdata"
+            # - name: PGDATA
+            #   value: "/var/lib/postgresql/data/pgdata"
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -54,7 +54,8 @@ spec:
             limits:
               memory: 200Mi
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            # - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/postgresql
               name: postgres-data
       restartPolicy: Always
       volumes:
