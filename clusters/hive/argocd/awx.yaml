@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: awx
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: awx
+  project: default
+  sources:
+  - repoURL: https://ansible-community.github.io/awx-operator-helm
+    chart: awx-operator
+    targetRevision: "3.2.0"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/awx/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    path: clusters/hive/apps/awx/k8s-manifests
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
