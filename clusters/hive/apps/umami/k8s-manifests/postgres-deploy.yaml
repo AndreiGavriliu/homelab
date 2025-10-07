@@ -27,8 +27,8 @@ spec:
         - image: postgres:18.0
           name: postgres
           env:
-            - name: PGDATA
-              value: "/var/lib/postgresql/data/pgdata"
+            # - name: PGDATA
+            #   value: "/var/lib/postgresql/data/pgdata"
             - name: TZ
               value: "Europe/Berlin"
             - name: PUID
@@ -54,7 +54,8 @@ spec:
             limits:
               memory: 200Mi
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            # - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/postgresql
               name: postgres-data
       restartPolicy: Always
       volumes:
