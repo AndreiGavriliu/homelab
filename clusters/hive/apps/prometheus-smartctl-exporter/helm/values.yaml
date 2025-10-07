@@ -2,6 +2,7 @@ config:
  devices:
  - /dev/sda
  - /dev/sdb
+ - /dev/nvme0n1
 
 common:
   config:
