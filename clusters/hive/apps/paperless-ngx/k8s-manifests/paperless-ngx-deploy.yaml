@@ -17,10 +17,11 @@ spec:
         app: paperless-ngx
     spec:
       serviceAccountName: paperless-ngx
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
+      # securityContext:
+      #   runAsNonRoot: true
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+        # fsGroup: 1000
       containers:
         - image: ghcr.io/paperless-ngx/paperless-ngx:2.18.4
           imagePullPolicy: Always
@@ -52,7 +53,9 @@ spec:
             - name: PAPERLESS_CONSUMER_RECURSIVE
               value: "true"
             - name: PAPERLESS_TASK_WORKERS
-              value: "2"
+              value: "1"
+            - name: PAPERLESS_THREADS_PER_WORKER
+              value: "1"
             - name: PAPERLESS_CONSUMER_POLLING_RETRY_COUNT
               value: "24"
             - name: PAPERLESS_FILENAME_FORMAT
