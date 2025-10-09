@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://argoproj.github.io/argo-helm
     chart: argo-cd
-    targetRevision: "8.5.10"
+    targetRevision: "8.6.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/argocd/helm/values.yaml
