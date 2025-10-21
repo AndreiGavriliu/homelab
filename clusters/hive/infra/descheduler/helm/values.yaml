@@ -1,5 +1,5 @@
 kind: CronJob
-deschedulingInterval: 1m
+deschedulingInterval: 30m
 successfulJobsHistoryLimit: 1
 failedJobsHistoryLimit: 1
 
