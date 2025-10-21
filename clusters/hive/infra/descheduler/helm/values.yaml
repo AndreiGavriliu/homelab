@@ -1,0 +1,43 @@
+kind: CronJob
+deschedulingInterval: 1m
+successfulJobsHistoryLimit: 1
+failedJobsHistoryLimit: 1
+
+cmdOptions:
+  v: 3
+
+deschedulerPolicy:
+  profiles:
+  - name: default
+    pluginConfig:
+    - name: DefaultEvictor
+      args:
+        evictLocalStoragePods: true
+        ignorePvcPods: false
+    - name: RemovePodsViolatingNodeAffinity
+      args:
+        nodeAffinityType:
+        - requiredDuringSchedulingIgnoredDuringExecution
+    - name: LowNodeUtilization
+      args:
+        thresholds:
+          cpu: 35
+          memory: 35
+          pods: 35
+        targetThresholds:
+          cpu: 60
+          memory: 60
+          pods: 60
+    - name: RemovePodsViolatingNodeTaints
+    - name: RemovePodsViolatingInterPodAntiAffinity
+    plugins:
+      deschedule:
+        enabled:
+        - RemovePodsViolatingNodeTaints
+        - RemovePodsViolatingNodeAffinity
+        - RemovePodsViolatingInterPodAntiAffinity
+        - LowNodeUtilization
+service:
+  enabled: true
+serviceMonitor:
+  enabled: true

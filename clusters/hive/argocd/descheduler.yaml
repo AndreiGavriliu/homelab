@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: descheduler
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: descheduler
+  project: default
+  sources:
+  - repoURL: https://kubernetes-sigs.github.io/descheduler/
+    chart: descheduler
+    targetRevision: "0.32.1"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/descheduler/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
