@@ -14,7 +14,7 @@ spec:
     targetRevision: "0.32.1"
     helm:
       valueFiles:
-      - $values/clusters/hive/apps/descheduler/helm/values.yaml
+      - $values/clusters/hive/infra/descheduler/helm/values.yaml
   - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: main
     ref: values
