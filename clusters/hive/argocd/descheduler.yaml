@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://kubernetes-sigs.github.io/descheduler/
     chart: descheduler
-    targetRevision: "0.32.1"
+    targetRevision: "0.33.0"
     helm:
       valueFiles:
       - $values/clusters/hive/infra/descheduler/helm/values.yaml
