@@ -14,10 +14,12 @@ deschedulerPolicy:
       args:
         evictLocalStoragePods: true
         ignorePvcPods: false
+
     - name: RemovePodsViolatingNodeAffinity
       args:
         nodeAffinityType:
-        - requiredDuringSchedulingIgnoredDuringExecution
+          - requiredDuringSchedulingIgnoredDuringExecution
+
     - name: LowNodeUtilization
       args:
         thresholds:
@@ -28,15 +30,20 @@ deschedulerPolicy:
           cpu: 60
           memory: 60
           pods: 60
-    - name: RemovePodsViolatingNodeTaints
+
     - name: RemovePodsViolatingInterPodAntiAffinity
+    - name: RemovePodsViolatingNodeTaints
+
     plugins:
       deschedule:
         enabled:
-        - RemovePodsViolatingNodeTaints
-        - RemovePodsViolatingNodeAffinity
-        - RemovePodsViolatingInterPodAntiAffinity
-        - LowNodeUtilization
+          - RemovePodsViolatingNodeTaints
+          - RemovePodsViolatingNodeAffinity
+          - RemovePodsViolatingInterPodAntiAffinity
+      balance:
+        enabled:
+          - LowNodeUtilization
+        
 service:
   enabled: true
 serviceMonitor:
