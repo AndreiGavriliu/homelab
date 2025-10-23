@@ -1,0 +1,68 @@
+environment:
+  OPENPROJECT_EE__MANAGER__VISIBLE: "false"
+  OPENPROJECT_EE__HIDE__BANNERS: "true"
+  OPENPROJECT_SELF__REGISTRATION: 0
+
+appInit:
+  resources:
+    limits:
+      memory: "1Gi"
+    requests:
+      memory: "512Mi"
+
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect@kubernetescrd
+  host: "project.gavriliu.com"
+  path: /
+  pathType: "Prefix"
+  tls:
+    enabled: false
+    secretName: ""
+
+podSecurityContext:
+  enabled: false
+
+containerSecurityContext:
+  enabled: false
+
+openproject:
+  useTmpVolumes: "false"
+  admin_user:
+    password_reset: "false"
+    name: "Admin"
+    mail: "admin@example.net"
+    secret: "openproject"
+    secretKeys:
+      password: "PASSWORD"
+  cache:
+    store: "file_store"
+
+memcached:
+  bundled: false
+  # connection: 
+  #   host: "memcached"
+  #   port: 11211
+
+postgresql:
+  bundled: false
+  connection:
+    host: "postgres"
+    port: 5432
+  auth:
+    existingSecret: "postgres"
+    secretKeys:
+      adminPasswordKey: "POSTGRES_PASSWORD"
+      userPasswordKey: "PASSWORD"
+    username: "openproject"
+    database: "openproject"
+
+seederJob:
+  resources:
+    limits:
+      memory: "1Gi"
+    requests:
+      memory: "512Mi"
