@@ -18,6 +18,11 @@ spec:
   - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: main
     ref: values
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    path: clusters/hive/apps/openproject/k8s-manifests
+    targetRevision: HEAD
+    directory:
+      recurse: true
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
