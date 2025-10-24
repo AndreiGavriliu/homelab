@@ -9,6 +9,11 @@ spec:
     namespace: openproject
   project: default
   sources:
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    path: clusters/hive/apps/openproject/k8s-manifests
+    targetRevision: HEAD
+    directory:
+      recurse: true
   - repoURL: https://charts.openproject.org
     chart: openproject
     targetRevision: "11.3.2"
@@ -18,11 +23,6 @@ spec:
   - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: main
     ref: values
-  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
-    path: clusters/hive/apps/openproject/k8s-manifests
-    targetRevision: HEAD
-    directory:
-      recurse: true
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
