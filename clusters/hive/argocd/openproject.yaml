@@ -16,7 +16,7 @@ spec:
       recurse: true
   - repoURL: https://charts.openproject.org
     chart: openproject
-    targetRevision: "11.3.3"
+    targetRevision: "11.4.1"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/openproject/helm/values.yaml
