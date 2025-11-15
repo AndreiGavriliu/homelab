@@ -51,6 +51,12 @@ timeout:
   workerPodReady: 600
   jobWait: ""
 
+garbagecollector:
+  actions:
+    enabled: true
+  daemonPeriod: 21600
+  keepMaxActions: 500
+
 limiter:
 #   executorReplicas: 2
 #   executorThreads: 2
