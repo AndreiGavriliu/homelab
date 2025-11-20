@@ -23,6 +23,11 @@ spec:
         - image: ghcr.io/home-assistant/home-assistant:2025.11.2
           imagePullPolicy: Always
           name: homeassistant
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - NET_RAW
           resources:
             requests:
               cpu: 700m
