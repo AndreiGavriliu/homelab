@@ -38,13 +38,14 @@ valkey:
   architecture: standalone
   replica:
     replicaCount: 0
-  resources:
-    requests:
-      cpu: 200m
-      memory: 250Mi
-    limits:
-      cpu: 200m
-      memory: 150Mi 
+  primary:
+    resources:
+      requests:
+        cpu: 200m
+        memory: 250Mi
+      limits:
+        cpu: 200m
+        memory: 150Mi 
 
 ingress:
   enabled: true
