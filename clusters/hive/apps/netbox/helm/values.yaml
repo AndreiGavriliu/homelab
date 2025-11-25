@@ -10,6 +10,14 @@ postgresql:
     username: netbox
     database: netbox
     existingSecret: postgresql
+  primary:
+    resources:
+      requests:
+        cpu: 200m
+        memory: 150Mi
+      limits:
+        cpu: 200m
+        memory: 250Mi 
 
 persistence:
   enabled: true
