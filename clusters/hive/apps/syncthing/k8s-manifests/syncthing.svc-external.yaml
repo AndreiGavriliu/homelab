@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-externalip
+  namespace: syncthing
+  labels:
+    app: syncthing
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.0.0.44
+spec:
+  type: LoadBalancer
+  ports:
+  - name: tcp-22000
+    protocol: TCP
+    port: 22000
+    targetPort: 22000
+  - name: udp-22000
+    protocol: UDP
+    port: 22000
+    targetPort: 22000
+  - name: udp-21027
+    protocol: UDP
+    port: 21027
+    targetPort: 21027
+  selector:
+    app: syncthing

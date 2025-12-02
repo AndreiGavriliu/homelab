@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: syncthing
+  name: syncthing
+  namespace: syncthing
+spec:
+  ports:
+    - name: syncthing
+      port: 8384
+      protocol: TCP
+      targetPort: 8384
+  selector:
+    app: syncthing
+  sessionAffinity: None
+  type: ClusterIP

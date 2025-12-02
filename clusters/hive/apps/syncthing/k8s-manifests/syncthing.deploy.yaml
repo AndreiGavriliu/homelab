@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  labels:
+    app: syncthing
+  namespace: syncthing
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: syncthing
+  template:
+    metadata:
+      labels:
+        app: syncthing
+    spec:
+      serviceAccount: syncthing
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - image: lscr.io/linuxserver/syncthing:2.0.11
+          imagePullPolicy: Always
+          name: syncthing
+          # resources:
+          #   requests:
+          #     cpu: 700m
+          #     memory: 1100Mi
+          #   limits:
+          #     memory: 1100Mi
+          # securityContext:
+          #   privileged: true
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Berlin"
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /obsidian
+              name: obsidian
+              subPath: data
+            - mountPath: /data1
+              name: data1
+            - mountPath: /data2
+              name: data2
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: obsidian
+          persistentVolumeClaim:
+            claimName: obsidian
+        - name: data1
+          persistentVolumeClaim:
+            claimName: data1
+        - name: data2
+          persistentVolumeClaim:
+            claimName: data2

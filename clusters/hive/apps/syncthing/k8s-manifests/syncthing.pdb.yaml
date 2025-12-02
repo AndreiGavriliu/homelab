@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: syncthing
+  labels:
+    app: syncthing
+  namespace: syncthing
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: syncthing
