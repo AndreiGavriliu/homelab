@@ -335,6 +335,7 @@ prometheus:
       #   'match[]':
       #     - '{__name__=~"jobs.*"}'
       static_configs:
+        scrape_timeout: 30s
         - targets:
           - 'prometheus-server.kasten-io.svc.cluster.local'
           labels:
