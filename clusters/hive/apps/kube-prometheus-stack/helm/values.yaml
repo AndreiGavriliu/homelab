@@ -318,6 +318,7 @@ prometheus:
               storage: 60Gi
     additionalScrapeConfigs:
     - job_name: "pi-hole"
+      scrape_interval: 60s
       scrape_timeout: 30s
       static_configs:
           - targets: ["prometheus-pihole-exporter.kube-prometheus-stack.svc:9100"]
