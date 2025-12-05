@@ -43,6 +43,12 @@ spec:
       namespace: netbox
       jsonPointers:
         - /data/valkey-password
+    - group: "apps"
+      kind: Deployment
+      name: netbox
+      namespace: netbox
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1secret
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
