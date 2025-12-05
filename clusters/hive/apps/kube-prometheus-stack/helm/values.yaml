@@ -319,7 +319,7 @@ prometheus:
     additionalScrapeConfigs:
     - job_name: "pi-hole"
       scrape_interval: 300s
-      scrape_timeout: 60s
+      scrape_timeout: 180s
       static_configs:
           - targets: ["prometheus-pihole-exporter.kube-prometheus-stack.svc:9100"]
     - job_name: 'node-exporter'
