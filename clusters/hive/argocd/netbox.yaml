@@ -23,6 +23,13 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: netbox-config
+      namespace: netbox
+      jsonPointers:
+        - /data/secret_key
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
