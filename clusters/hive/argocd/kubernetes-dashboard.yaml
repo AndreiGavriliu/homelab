@@ -23,9 +23,19 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: kubernetes-dashboard-csrf
+      namespace: kubernetes-dashboard
+      jsonPointers:
+        - /data/private.key
+    - group: "apps"
+      kind: Deployment
+      name: kubernetes-dashboard-api
+      namespace: kubernetes-dashboard
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1config
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
-    # automated:
-    #   prune: true
-    #   selfHeal: true
