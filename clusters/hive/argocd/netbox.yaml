@@ -49,6 +49,12 @@ spec:
       namespace: netbox
       jsonPointers:
         - /spec/template/metadata/annotations/checksum~1secret
+    - group: "apps"
+      kind: StatefulSet
+      name: netbox-valkey-primary
+      namespace: netbox
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1secret
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
