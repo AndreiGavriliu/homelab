@@ -30,6 +30,19 @@ spec:
       namespace: netbox
       jsonPointers:
         - /data/secret_key
+    - group: ""
+      kind: Secret
+      name: netbox-superuser
+      namespace: netbox
+      jsonPointers:
+        - /data/api_token
+        - /data/password
+    - group: ""
+      kind: Secret
+      name: netbox-valkey
+      namespace: netbox
+      jsonPointers:
+        - /data/valkey-password
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
