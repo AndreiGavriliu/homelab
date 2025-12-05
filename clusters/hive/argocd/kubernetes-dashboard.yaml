@@ -36,6 +36,12 @@ spec:
       namespace: kubernetes-dashboard
       jsonPointers:
         - /spec/template/metadata/annotations/checksum~1config
+    - group: "apps"
+      kind: Deployment
+      name: kubernetes-dashboard-auth
+      namespace: kubernetes-dashboard
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1config
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
