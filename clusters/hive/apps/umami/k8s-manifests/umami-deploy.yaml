@@ -22,7 +22,7 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
       containers:
-        - image: ghcr.io/umami-software/umami:postgresql-v2.19.0
+        - image: ghcr.io/umami-software/umami:postgresql-v2.20.0
           imagePullPolicy: Always
           name: umami
           env:
