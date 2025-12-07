@@ -21,9 +21,19 @@ spec:
   - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
     targetRevision: main
     path: clusters/hive/apps/kasten-io/k8s-manifests
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: kopia-tls-cert
+      namespace: kasten-io
+      jsonPointers:
+        - /data/tls.crt
+    - group: ""
+      kind: Secret
+      name: kopia-tls-key
+      namespace: kasten-io
+      jsonPointers:
+        - /data/tls.key
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
-    # automated:
-    #   prune: true
-    #   selfHeal: true
