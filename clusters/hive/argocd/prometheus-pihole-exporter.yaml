@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-prometheus
+    namespace: kube-prometheus-stack
   project: default
   source:
     path: clusters/hive/apps/prometheus-pihole-exporter/k8s-manifests
