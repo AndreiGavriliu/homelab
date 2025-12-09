@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: prometheus-fritzbox-exporter
+  labels:
+    app: prometheus-fritzbox-exporter
+  namespace: kube-prometheus-stack
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      app: prometheus-fritzbox-exporter

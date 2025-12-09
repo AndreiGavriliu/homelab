@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-fritzbox-exporter
+  labels:
+    app: prometheus-fritzbox-exporter
+  namespace: kube-prometheus-stack
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: prometheus-fritzbox-exporter
+  template:
+    metadata:
+      labels:
+        app: prometheus-fritzbox-exporter
+    spec:
+      serviceAccountName: prometheus-fritzbox-exporter
+      containers:
+        - image: pdreker/fritz_exporter:2.6.1
+          imagePullPolicy: Always
+          name: prometheus-fritzbox-exporter
+          env:
+          - name: PORT
+            value: "9100"
+          - name: PIHOLE_HOSTNAME
+            value: "10.0.0.5"
+          - name: PIHOLE_PORT
+            value: "80"
+          - name: PORT
+            value: "9100"
+          - name: PIHOLE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: prometheus-fritzbox-exporter
+                key: PIHOLE_PASSWORD
