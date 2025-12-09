@@ -22,16 +22,20 @@ spec:
           imagePullPolicy: Always
           name: prometheus-fritzbox-exporter
           env:
-          - name: PORT
+          - name: FRITZ_PORT
             value: "9100"
-          - name: PIHOLE_HOSTNAME
-            value: "10.0.0.5"
-          - name: PIHOLE_PORT
-            value: "80"
-          - name: PORT
-            value: "9100"
-          - name: PIHOLE_PASSWORD
+          - name: FRITZ_HOSTNAME
             valueFrom:
               secretKeyRef:
                 name: prometheus-fritzbox-exporter
-                key: PIHOLE_PASSWORD
+                key: FRITZ_HOSTNAME
+          - name: FRITZ_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: prometheus-fritzbox-exporter
+                key: FRITZ_USERNAME
+          - name: FRITZ_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: prometheus-fritzbox-exporter
+                key: FRITZ_PASSWORD
