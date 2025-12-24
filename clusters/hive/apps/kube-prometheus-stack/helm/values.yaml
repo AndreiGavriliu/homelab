@@ -15,11 +15,20 @@ alertmanager:
       receiver: Default
       routes:
       - receiver: "alertmanager-to-github"
+      - receiver: 'null'
+        match:
+          alertname: 'InfoInhibitor'
     receivers:
       - name: Default
       - name: "alertmanager-to-github"
         webhook_configs:
           - url: "http://alertmanager-to-github.alertmanager-to-github.svc.cluster.local/v1/webhook?owner=AndreiGavriliu&repo=homelab"
+      - name: 'null'
+    inhibit_rules:
+      - source_match:
+          severity: 'critical'
+        target_match:
+          severity: 'info'
   alertmanagerSpec:
     storage:
       volumeClaimTemplate:
