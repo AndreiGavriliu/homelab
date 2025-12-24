@@ -17,7 +17,7 @@ spec:
         app: unpoller
     spec:
       containers:
-        - image: ghcr.io/unpoller/unpoller:v2.20.0
+        - image: ghcr.io/unpoller/unpoller:v2.20.1
           imagePullPolicy: Always
           name: unpoller
           env:
