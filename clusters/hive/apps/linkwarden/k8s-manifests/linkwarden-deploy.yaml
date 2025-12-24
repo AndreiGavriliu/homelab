@@ -24,7 +24,7 @@ spec:
       #   runAsUser: 1000
       #   runAsGroup: 1000
       containers:
-        - image: ghcr.io/linkwarden/linkwarden:v2.13.2
+        - image: ghcr.io/linkwarden/linkwarden:v2.13.3
           name: linkwarden
           env:
             - name: NEXTAUTH_URL
