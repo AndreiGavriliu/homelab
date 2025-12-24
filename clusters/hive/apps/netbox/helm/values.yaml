@@ -13,10 +13,10 @@ postgresql:
   primary:
     resources:
       requests:
-        cpu: 200m
+        cpu: 300m
         memory: 150Mi
       limits:
-        cpu: 200m
+        cpu: 300m
         memory: 250Mi 
 
 persistence:
