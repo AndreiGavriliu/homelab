@@ -33,7 +33,7 @@ resources:
     cpu: 500m
     memory: 1Gi
   limits:
-    cpu: 750m
+    # cpu: 750m
     memory: 2Gi
 
 worker:
@@ -52,7 +52,7 @@ valkey:
         cpu: 200m
         memory: 150Mi
       limits:
-        cpu: 200m
+        # cpu: 200m
         memory: 250Mi 
 
 ingress:
