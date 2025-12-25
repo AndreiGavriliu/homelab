@@ -16,7 +16,7 @@ postgresql:
         cpu: 300m
         memory: 150Mi
       limits:
-        cpu: 300m
+        # cpu: 300m
         memory: 250Mi 
 
 persistence:
