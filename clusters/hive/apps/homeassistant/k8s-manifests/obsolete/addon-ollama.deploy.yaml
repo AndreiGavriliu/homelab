@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addon-ollama
+  labels:
+    app: addon-ollama
+  namespace: homeassistant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: addon-ollama
+  template:
+    metadata:
+      labels:
+        app: addon-ollama
+    spec:
+      serviceAccountName: addon-ollama
+      containers:
+        - name: ollama
+          image: ollama/ollama:0.13.5
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 11434
+              name: tcp-11434
+              protocol: TCP

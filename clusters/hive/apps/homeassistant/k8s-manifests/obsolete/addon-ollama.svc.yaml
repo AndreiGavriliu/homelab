@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: addon-ollama
+  name: addon-ollama
+  namespace: homeassistant
+spec:
+  ports:
+    - name: http
+      port: 11434
+      protocol: TCP
+      targetPort: tcp-11434
+  selector:
+    app: addon-ollama
+  sessionAffinity: None
+  type: ClusterIP
