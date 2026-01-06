@@ -22,7 +22,7 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
       containers:
-        - image: ghcr.io/umami-software/umami:3.0.2
+        - image: ghcr.io/umami-software/umami:3.0.3
           imagePullPolicy: Always
           name: umami
           env:
