@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cloudflared
+  name: cloudflared
+  namespace: cloudflared
+spec:
+  ports:
+    - name: cloudflared
+      port: 2000
+      protocol: TCP
+      targetPort: 2000
+  selector:
+    app: cloudflared
+  sessionAffinity: None
+  type: ClusterIP

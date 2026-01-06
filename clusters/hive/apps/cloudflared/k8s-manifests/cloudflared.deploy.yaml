@@ -3,15 +3,17 @@ kind: Deployment
 metadata:
   name: cloudflared
   namespace: cloudflared
+  labels:
+    app: cloudflared
 spec:
   replicas: 2
   selector:
     matchLabels:
-      pod: cloudflared
+      app: cloudflared
   template:
     metadata:
       labels:
-        pod: cloudflared
+        app: cloudflared
     spec:
       securityContext:
         sysctls:
