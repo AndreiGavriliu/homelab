@@ -20,7 +20,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-        - image: lscr.io/linuxserver/syncthing:2.0.12
+        - image: lscr.io/linuxserver/syncthing:2.0.13
           imagePullPolicy: Always
           name: syncthing
           # resources:
