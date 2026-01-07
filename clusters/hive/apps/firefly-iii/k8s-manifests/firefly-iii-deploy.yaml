@@ -17,7 +17,7 @@ spec:
         k8s-app: firefly-iii
     spec:
       containers:
-        - image: fireflyiii/core:version-6.4.14
+        - image: fireflyiii/core:version-6.4.15
           name: firefly-iii
           resources:
             requests:
