@@ -17,7 +17,7 @@ spec:
         k8s-app: fints-importer
     spec:
       containers:
-        - image: benkl/firefly-iii-fints-importer
+        - image: benkl/firefly-iii-fints-importer:2026-01-06
           name: fints-importer
           resources:
             requests:
