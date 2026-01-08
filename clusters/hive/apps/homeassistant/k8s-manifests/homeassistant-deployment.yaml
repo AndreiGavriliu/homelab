@@ -24,6 +24,7 @@ spec:
           imagePullPolicy: Always
           name: homeassistant
           securityContext:
+            privileged: true
             capabilities:
               add:
                 - NET_ADMIN
@@ -34,8 +35,6 @@ spec:
               memory: 1100Mi
             limits:
               memory: 1100Mi
-          securityContext:
-            privileged: true
           env:
             - name: TZ
               value: "Europe/Berlin"
