@@ -7,6 +7,7 @@ metadata:
   namespace: homeassistant
 spec:
   schedule: "0 21 * * *"
+  timeZone: "Europe/Berlin"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:

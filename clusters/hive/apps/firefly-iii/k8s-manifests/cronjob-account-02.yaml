@@ -5,7 +5,7 @@ metadata:
   namespace: firefly-iii
 spec:
   schedule: "5 */4 * * *"
-  # suspend: "false"
+  timeZone: "Europe/Berlin"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   jobTemplate:
