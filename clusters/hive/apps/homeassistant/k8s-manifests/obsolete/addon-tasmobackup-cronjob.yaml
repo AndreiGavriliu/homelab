@@ -20,7 +20,7 @@ spec:
           serviceAccountName: addon-tasmoadmin
           containers:
             - name: tasmobackup
-              image: curlimages/curl:8.17.0
+              image: curlimages/curl:8.18.0
               imagePullPolicy: Always
               resources:
                 requests:
