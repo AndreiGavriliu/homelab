@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: changedetection
-          image: dgtlmoon/changedetection.io:0.51.4
+          image: dgtlmoon/changedetection.io:0.52.1
           imagePullPolicy: Always
           resources:
             requests:
