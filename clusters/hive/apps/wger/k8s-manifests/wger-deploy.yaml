@@ -19,7 +19,7 @@ spec:
         app: wger
     spec:
       containers:
-        - image: wger/server:2.4-dev
+        - image: wger/server:2.5-dev
           imagePullPolicy: Always
           resources:
             requests:
