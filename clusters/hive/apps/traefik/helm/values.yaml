@@ -5,10 +5,10 @@ deployment:
 nodeSelector:
   node-role.kubernetes.io/control-plane: "true"
 
-globalArguments:
-- "--global.checknewversion"
-- "--global.sendanonymoususage=false"
-- "--serversTransport.insecureSkipVerify=true"
+# globalArguments:
+# - "--global.checknewversion"
+# - "--global.sendanonymoususage=false"
+# - "--serversTransport.insecureSkipVerify=true"
 
 tlsStore:
   default:
