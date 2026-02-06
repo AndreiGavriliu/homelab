@@ -2,6 +2,9 @@ powerFeedDefaultVoltage: 230
 
 preferIPv4: true
 
+livenessProbe:
+  enabled: false
+
 postgresql:
   enabled: true
   image:
