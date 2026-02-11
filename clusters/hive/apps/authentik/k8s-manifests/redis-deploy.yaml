@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: redis:8.4
+        - image: redis:8.6
           imagePullPolicy: Always
           command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
           name: redis
