@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: addon-vscode
       containers:
-        - image: lscr.io/linuxserver/code-server:4.108.2
+        - image: lscr.io/linuxserver/code-server:4.109.2
           imagePullPolicy: Always
           name: vscode
           env:
