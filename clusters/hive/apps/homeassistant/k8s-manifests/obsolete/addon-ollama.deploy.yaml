@@ -19,7 +19,7 @@ spec:
       serviceAccountName: addon-ollama
       containers:
         - name: ollama
-          image: ollama/ollama:0.16.2
+          image: ollama/ollama:0.16.3
           imagePullPolicy: Always
           ports:
             - containerPort: 11434
