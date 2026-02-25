@@ -51,7 +51,7 @@ renovate:
           ],
           "depNameTemplate": "k3s-io/k3s",
           "datasourceTemplate": "github-releases",
-          "versioningTemplate": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\+k3s(?<build>\\d+)$"
+          "versioningTemplate": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\+k3s(?<build>\\d+)$",
           "labels": ["k3s update"]
         }
       ],
