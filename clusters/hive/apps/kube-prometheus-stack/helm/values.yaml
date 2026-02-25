@@ -334,9 +334,9 @@ prometheus:
     - job_name: 'node-exporter'
       static_configs:
         - targets: ['10.0.0.5:9100', '10.0.0.10:9100', '10.0.0.30:9100', '10.0.0.101:9100']
-    - job_name: 'unifi'
-      static_configs:
-        - targets: ['unpoller.unpoller.svc:9100']
+    # - job_name: 'unifi'
+    #   static_configs:
+    #     - targets: ['unpoller.unpoller.svc:9100']
     - job_name: 'prometheus-fritzbox-exporter'
       static_configs:
         - targets: ['prometheus-fritzbox-exporter.kube-prometheus-stack.svc:9100']
