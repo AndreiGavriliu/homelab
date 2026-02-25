@@ -47,7 +47,7 @@ renovate:
         {
           "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/plans/.*\\.ya?ml$"],
           "matchStrings": [
-            "version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
+            "^\\s*version:\\s*(?<currentValue>v\\d+\\.\\d+\\.\\d+\\+k3s\\d+)\\s*$"
           ],
           "depNameTemplate": "k3s",
           "datasourceTemplate": "github-releases",
