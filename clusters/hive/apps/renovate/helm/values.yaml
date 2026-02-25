@@ -47,12 +47,11 @@ renovate:
         {
           "fileMatch": ["^clusters/hive/infra/system-upgrade-controller/plans/.*\\.ya?ml$"],
           "matchStrings": [
-            "spec:\\s*\\n\\s*version:\\s*v(?<currentValue>\\d+\\.\\d+\\.\\d+\\+k3s\\d+)"
+            "version:\\s*\"?(?<currentValue>v\\d+\\.\\d+\\.\\d+\\+k3s\\d+)\"?"
           ],
-          "depNameTemplate": "k3s",
+          "depNameTemplate": "k3s-io/k3s",
           "datasourceTemplate": "github-releases",
-          "packageNameTemplate": "k3s-io/k3s",
-          "versioningTemplate": "semver",
+          "versioningTemplate": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\+k3s(?<build>\\d+)$"
           "labels": ["k3s update"]
         }
       ],
