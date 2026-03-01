@@ -23,7 +23,7 @@ spec:
       #   runAsGroup: 1000
         # fsGroup: 1000
       containers:
-        - image: ghcr.io/paperless-ngx/paperless-ngx:2.20.8
+        - image: ghcr.io/paperless-ngx/paperless-ngx:2.20.9
           imagePullPolicy: Always
           name: paperless-ngx
           env:
