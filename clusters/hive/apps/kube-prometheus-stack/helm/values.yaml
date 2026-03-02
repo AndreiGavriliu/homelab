@@ -76,6 +76,8 @@ defaultRules:
     prometheus: true
     prometheusOperator: true
     windows: true
+  disabled:
+    NodeSystemSaturation: true
 
 additionalPrometheusRulesMap:
   rule-name:
@@ -181,7 +183,7 @@ additionalPrometheusRulesMap:
         labels:
           issue: K10 backup {{$labels.backup}} took more than 1 hour.
           severity: warning
-    - "name": "argo-cd"
+    - name: argo-cd.rules
       "rules":
       - "alert": "ArgoCdAppSyncFailed"
         "annotations":
@@ -297,6 +299,25 @@ additionalPrometheusRulesMap:
         annotations:
           summary: "Pod OOMKilled in {{ $labels.namespace }}/{{ $labels.pod }}"
           description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} was OOMKilled in the last 5 minutes."
+    - name: homelab.rules
+      rules:
+        - alert: NodeSystemSaturationWarning
+          expr: node:node_cpu_saturation:ratio > 0.90
+          for: 20m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Node system saturation (warning)"
+            description: "Node {{ $labels.node }} has sustained CPU saturation >90% for 20 minutes."
+
+        - alert: NodeSystemSaturationCritical
+          expr: node:node_cpu_saturation:ratio > 0.98
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Node system saturation (critical)"
+            description: "Node {{ $labels.node }} is critically CPU saturated."
 global:
   rbac:
     create: true

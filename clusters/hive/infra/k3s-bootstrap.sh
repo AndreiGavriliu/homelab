@@ -16,8 +16,8 @@ k3sup install \
   --user $USER \
   --ip $MASTER_01 \
   --ssh-key /Users/Andrei.Gavriliu/.ssh/id_rsa_nopass \
-  --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage' \
-#  --k3s-version v1.33.1+k3s1
+  --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage --kubelet-arg=system-reserved=cpu=500m,memory=1Gi --kubelet-arg=kube-reserved=cpu=500m,memory=1Gi' \
+  --k3s-version v1.35.1+k3s1
 
 # The second node joins
 k3sup join \
@@ -27,8 +27,8 @@ k3sup join \
   --server-user $USER \
   --server-ip $MASTER_01 \
   --ssh-key /Users/Andrei.Gavriliu/.ssh/id_rsa_nopass \
-  --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage' \
-#  --k3s-version v1.33.1+k3s1
+  --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage --kubelet-arg=system-reserved=cpu=500m,memory=1Gi --kubelet-arg=kube-reserved=cpu=500m,memory=1Gi' \
+  --k3s-version v1.35.1+k3s1
 
 # The third node joins
 k3sup join \
@@ -38,8 +38,8 @@ k3sup join \
   --server-user $USER \
   --server-ip $MASTER_01 \
   --ssh-key /Users/Andrei.Gavriliu/.ssh/id_rsa_nopass \
-  --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage' \
-#  --k3s-version v1.33.1+k3s1
+  --k3s-extra-args '--disable traefik --disable servicelb --disable local-storage --kubelet-arg=system-reserved=cpu=500m,memory=1Gi --kubelet-arg=kube-reserved=cpu=500m,memory=1Gi' \
+  --k3s-version v1.35.1+k3s1
 
 k3sup join \
   --ip $WORKER_01 \
@@ -47,4 +47,5 @@ k3sup join \
   --server-user $USER \
   --server-ip $MASTER_01 \
   --ssh-key /Users/Andrei.Gavriliu/.ssh/id_rsa_nopass \
-#  --k3s-version v1.33.1+k3s1
+  --k3s-extra-args '--kubelet-arg=system-reserved=cpu=500m,memory=1Gi --kubelet-arg=kube-reserved=cpu=500m,memory=1Gi' \
+  --k3s-version v1.35.1+k3s1
