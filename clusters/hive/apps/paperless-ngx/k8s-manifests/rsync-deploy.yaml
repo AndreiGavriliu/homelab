@@ -32,7 +32,22 @@ spec:
             limits:
               memory: 50Mi
           command: [ "/bin/sh", "-c", "--" ]
-          args: [ "cd /paperless-ngx-media/documents/originals && while true; do rsync -avz --delete . /documents/; sleep 60; done" ]
+          # args: [ "cd /paperless-ngx-media/documents/originals && while true; do rsync -avz --delete . /documents/; sleep 60; done" ]
+          args:
+            - |
+              cd /paperless-ngx-media/documents/originals
+              OLD_HASH=""
+              while true; do
+                NEW_HASH=$(find . -type f -exec stat -c "%Y %s %n" {} \; | md5sum | awk '{print $1}')
+                if [ "$NEW_HASH" != "$OLD_HASH" ]; then
+                  echo "$(date) - Change detected, running rsync..."
+                  rsync -avz --delete . /documents/
+                  OLD_HASH=$NEW_HASH
+                else
+                  echo "$(date) - No changes detected, skipping rsync."
+                fi
+                sleep 60
+              done
           volumeMounts:
             - mountPath: /paperless-ngx-media
               name: paperless-ngx-media
