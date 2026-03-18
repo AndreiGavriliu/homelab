@@ -41,8 +41,18 @@ spec:
                 NEW_HASH=$(find . -type f -exec stat -c "%Y %s %n" {} \; | md5sum | awk '{print $1}')
                 if [ "$NEW_HASH" != "$OLD_HASH" ]; then
                   echo "$(date) - Change detected, running rsync..."
-                  rsync -avz --delete . /documents/
-                  OLD_HASH=$NEW_HASH
+                  # Retry loop for rsync in case destination is unreachable
+                  while true; do
+                    rsync -avz --delete . /documents/
+                    if [ $? -eq 0 ]; then
+                      echo "$(date) - rsync completed successfully."
+                      OLD_HASH=$NEW_HASH
+                      break
+                    else
+                      echo "$(date) - rsync failed (destination unreachable?), retrying in 60s..."
+                      sleep 60
+                    fi
+                  done
                 else
                   echo "$(date) - No changes detected, skipping rsync."
                 fi
