@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: gotenberg/gotenberg:8.28
+        - image: gotenberg/gotenberg:8.29
           imagePullPolicy: Always
           name: gotenberg
           command:
