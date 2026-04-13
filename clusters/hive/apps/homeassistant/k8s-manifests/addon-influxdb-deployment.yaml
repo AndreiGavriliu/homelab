@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: influxdb:1.12.3
+        - image: influxdb:1.12.4
           imagePullPolicy: Always
           name: influxdb
           resources:
