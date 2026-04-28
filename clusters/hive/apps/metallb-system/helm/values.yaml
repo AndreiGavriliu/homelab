@@ -2,9 +2,9 @@ controller:
   resources:
     requests:
       cpu: 50m
-      memory: 100Mi
+      memory: 150Mi
     limits:
-      memory: 100Mi
+      memory: 150Mi
 
 speaker:
   resources:
