@@ -32,9 +32,9 @@ spec:
           resources:
             requests:
               cpu: 700m
-              memory: 2000Mi
+              memory: 4000Mi
             limits:
-              memory: 2000Mi
+              memory: 4000Mi
           env:
             - name: TZ
               value: "Europe/Berlin"
