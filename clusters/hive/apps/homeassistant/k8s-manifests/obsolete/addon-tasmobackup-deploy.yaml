@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: addon-tasmobackup
       containers:
-        - image: danmed/tasmobackupv1:1.06.09
+        - image: danmed/tasmobackupv1:1.06.10
           imagePullPolicy: Always
           name: tasmobackup
           # securityContext:
