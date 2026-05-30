@@ -19,7 +19,7 @@ spec:
         k8s-app: mariadb
     spec:
       containers:
-        - image: lscr.io/linuxserver/mariadb:11.4.11
+        - image: lscr.io/linuxserver/mariadb:11.4.12
           name: mariadb
           resources:
             requests:
