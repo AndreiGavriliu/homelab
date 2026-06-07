@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: prometheus-fritzbox-exporter
       containers:
-        - image: pdreker/fritz_exporter:3.0.0
+        - image: pdreker/fritz_exporter:3.1.0
           imagePullPolicy: Always
           name: prometheus-fritzbox-exporter
           env:
