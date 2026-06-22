@@ -1,0 +1,57 @@
+clusterSize: 1
+
+allowAdminParty: false
+
+autoSetup:
+  enabled: true
+  image:
+    repository: curlimages/curl
+    tag: latest
+    pullPolicy: Always
+  defaultDatabases:
+    - _global_changes
+    - obsidian
+
+createAdminSecret: true
+
+adminUsername: admin
+
+serviceAccount:
+  enabled: true
+  create: true
+
+persistentVolume:
+  enabled: true
+  existingClaims: []
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  storageClass: "longhorn"
+
+enableSearch: false
+
+service:
+  annotations: {}
+  enabled: true
+  type: ClusterIP
+  externalPort: 5984
+  targetPort: 5984
+  labels: {}
+  extraPorts: []
+
+resources: {}
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # limits:
+  #  cpu: 56
+  #  memory: 256Gi
+
+couchdbConfig:
+  chttpd:
+    bind_address: any
+    require_valid_user: false
+
+dns:
+  clusterDomainSuffix: cluster.local
