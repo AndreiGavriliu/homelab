@@ -49,6 +49,9 @@ resources: {}
   #  memory: 256Gi
 
 couchdbConfig:
+  couchdb:
+    uuid: "obsidian-livesync"
+
   chttpd:
     bind_address: any
     require_valid_user: false
