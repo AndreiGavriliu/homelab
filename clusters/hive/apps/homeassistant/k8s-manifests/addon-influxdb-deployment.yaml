@@ -31,7 +31,7 @@ spec:
               memory: 1200Mi
             limits:
               # cpu: 100m
-              memory: 1200Mi
+              memory: 2000Mi
           env:
             - name: TZ
               value: "Europe/Berlin"
