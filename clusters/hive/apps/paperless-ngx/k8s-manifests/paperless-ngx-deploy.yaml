@@ -79,6 +79,11 @@ spec:
                 secretKeyRef:
                   name: paperless-ngx
                   key: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+            - name: PAPERLESS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx
+                  key: PAPERLESS_SECRET_KEY
           volumeMounts:
             - mountPath: /usr/src/paperless/data
               name: paperless-ngx-data
