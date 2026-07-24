@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: ghcr.io/goauthentik/server:2026.5.5
+        - image: ghcr.io/goauthentik/server:2026.5.6
           command: ["ak"]
           args: ["worker"]
           imagePullPolicy: Always
