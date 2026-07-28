@@ -21,7 +21,7 @@ spec:
             - -- 
             - /bin/sh
             - -c
-            - /bin/meilisearch --experimental-dumpless-upgrade
+            - /bin/meilisearch
           resources:
             requests:
               cpu: 100m
