@@ -21,7 +21,7 @@ spec:
             - -- 
             - /bin/sh
             - -c
-            - /bin/meilisearch
+            - /bin/meilisearch --upgrade-db
           resources:
             requests:
               cpu: 100m
@@ -30,8 +30,6 @@ spec:
               memory: 1200Mi
           env:
             - name: MEILI_NO_ANALYTICS
-              value: "true"
-            - name: MEILI_UPGRADE_DB
               value: "true"
           volumeMounts:
             - mountPath: /meili_data
