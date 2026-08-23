@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccount: vaultwarden
       containers:
-        - image: vaultwarden/server:1.37.1
+        - image: vaultwarden/server:1.37.2
           imagePullPolicy: Always
           name: vaultwarden
           livenessProbe:
