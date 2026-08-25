@@ -17,7 +17,7 @@ spec:
         k8s-app: mealie
     spec:
       containers:
-        - image: ghcr.io/mealie-recipes/mealie:v3.23.1
+        - image: ghcr.io/mealie-recipes/mealie:v3.24.0
           imagePullPolicy: Always
           name: mealie
           resources:
