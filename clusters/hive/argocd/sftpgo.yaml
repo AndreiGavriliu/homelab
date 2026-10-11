@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sftpgo
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sftpgo
+  project: default
+  sources:
+  - repoURL: ghcr.io/sftpgo/helm-charts/
+    chart: sftpgo
+    targetRevision: "0.47.0"
+    helm:
+      valueFiles:
+      - $values/clusters/hive/apps/sftpgo/helm/values.yaml
+  - repoURL: 'git@github.com:AndreiGavriliu/homelab.git'
+    targetRevision: main
+    ref: values
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
