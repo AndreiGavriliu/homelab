@@ -9,7 +9,7 @@ spec:
     namespace: sftpgo
   project: default
   sources:
-  - repoURL: ghcr.io/sftpgo/helm-charts/
+  - repoURL: ghcr.io/sftpgo/helm-charts
     chart: sftpgo
     targetRevision: "0.47.0"
     helm:
