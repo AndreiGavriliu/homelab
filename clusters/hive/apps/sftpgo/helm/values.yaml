@@ -9,6 +9,11 @@ httpd:
   enabled: true
   port: 8080
 
+service:
+  ports:
+    webdav:
+      port: 81
+
 ui:
   ingress:
     enabled: true
