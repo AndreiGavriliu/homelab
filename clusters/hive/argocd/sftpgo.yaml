@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: ghcr.io/sftpgo/helm-charts
     chart: sftpgo
-    targetRevision: "0.47.0"
+    targetRevision: "0.48.0"
     helm:
       valueFiles:
       - $values/clusters/hive/apps/sftpgo/helm/values.yaml
