@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: prometheus-pihole-exporter
       containers:
-        - image: ekofr/pihole-exporter:v1.2.0
+        - image: ekofr/pihole-exporter:v1.3.0
           imagePullPolicy: Always
           name: prometheus-pihole-exporter
           env:
