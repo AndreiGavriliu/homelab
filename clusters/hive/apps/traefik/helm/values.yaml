@@ -28,7 +28,7 @@ tlsStore:
 
 service:
   type: LoadBalancer
-  externalTrafficPolicy: Local
+  # externalTrafficPolicy: Local
   # clusterIP: 10.0.0.30
   # externalIPs:
   #   - 10.0.0.49
