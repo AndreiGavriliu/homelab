@@ -33,7 +33,7 @@ service:
   # externalIPs:
   #   - 10.0.0.49
   # type: LoadBalancer
-  loadBalancerIP: '10.0.0.49'
+  # loadBalancerIP: '10.0.0.49'
   annotations:
     metallb.universe.tf/loadBalancerIPs: '10.0.0.49'
 
