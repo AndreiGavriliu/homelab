@@ -27,7 +27,7 @@ tlsStore:
 # #     metallb.universe.tf/loadBalancerIPs: '10.0.0.31'
 
 service:
-  type: LoadBalancer
+  # type: LoadBalancer
   # externalTrafficPolicy: Local
   # clusterIP: 10.0.0.30
   # externalIPs:
